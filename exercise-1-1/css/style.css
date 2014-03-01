@@ -22,6 +22,9 @@ body {
 a {
 	text-decoration: none;
 }
+a:link, a:visited {
+	color: black;
+}
 
 .title-top {
 	text-align: center;
@@ -110,7 +113,7 @@ img {
 	border-radius: 10px;
 }
 
-.hotel-review {
+.hotel-review, .previous-reviews {
 	background-color: #efefef;
 	margin-left: 10px;
 	margin-right: 10px;
@@ -121,6 +124,11 @@ img {
 	padding-left: 10px;
 	padding-right: 10px;
 	border-radius: 10px;
+}
+
+.previous-reviews {
+	font-weight: bold;
+	text-align: center;
 }
 
 h3 {
