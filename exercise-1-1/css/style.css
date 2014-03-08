@@ -14,6 +14,23 @@ ol, ul { list-style: none; }
 
 /*Application specific*/
 
+@media all and (max-width:479px) {
+  
+}
+
+@media all and (min-width:480px) and (max-width:767px) {
+  
+}
+
+@media all and (min-width:768px) and (max-width:1023px) {
+  
+}
+
+@media all and (min-width:1024px) {
+  
+}
+
+
 body {
 	background-color:#efefef;
 	font-family: "Arial";
@@ -30,7 +47,7 @@ a:link, a:visited {
 	text-align: center;
 	width: 30%;
 	margin: auto;
-	margin-bottom: 20px;
+	margin-bottom: 1.5em;
 
 }
 
@@ -39,25 +56,26 @@ a:link, a:visited {
 }
 
 #nav-top {
-	width: 23%;
+    text-align: center;
+	width: 100%;
 	margin: auto;
 }
 
 #nav-top li {
 	display: inline-block; 
-	padding: 10px;
+	padding: 0.4em;
 	background-color: #ffc45e;
 	border: 2px solid #dfdfdf;
 }
 
 #menu-top {
-	margin-bottom: 15px;
+	margin-bottom: 1em;
 }
 
 #col-left {
 	width: 10%;	
 	float: left;
-	padding: 10px;
+	padding: 0.8em;
 }
 
 #col-left a {
@@ -73,21 +91,21 @@ a:link, a:visited {
 }
 
 #col-center {
-	width: 70%;
+	width: 65%;
 	float: left;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-top: 0.8em;
+	padding-bottom: 0.8em;
 }
 
 #col-right {
-	width: 16%;
+	width:  20%;
 	float: right;
 }
 
 #col-right .orange-box span {
     display:  inline-block;
 	font-weight: bold;
-    padding-bottom: 10px;
+    padding-bottom: 0.8em;
 }
 
 #col-right .orange-box a {
@@ -106,8 +124,8 @@ a:link, a:visited {
 #col-right .orange-box .reviewer-right{
     display:  inline-block;
     clear:  left;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
 }
 
 
@@ -115,13 +133,16 @@ a:link, a:visited {
     float: left;
 	width: 30%;
 	height: 30%;
+    min-width: 50px;
 }
 
 #col-right #col-right-center {
     text-align: center;
 }
 
+
 #footer {
+    clear:  both;
 	width: 70%;
 	margin: auto;
 }
@@ -131,34 +152,36 @@ a:link, a:visited {
 }
 
 img {
-	border-radius: 10px;
+	border-radius: 0.8em;
+}
+
+.orange-box, .blue-box{
+    margin: 0.4em;
+	padding: 0.4em;
+	border-radius: 0.8em;
 }
 
 .orange-box {
 	background-color: #ffc45e;
-	margin: 5px;
-	padding: 5px;
-	border-radius: 10px;
 }
 
 .blue-box {
 	background-color: #3b73db;
-	margin: 5px;
-	padding: 5px;
-	border-radius: 10px;
     text-align: center;
 }
 
 .blue-box img {
     width: 20%;
     height: 20%;
+    min-width: 30px;
 }
 
 
-.reviewer {    float:  right;    text-align: right; 
+.reviewer {    margin-top: 1em;    float:  right;    text-align: right; 
 }
 
-.reviewer img{    width:  70px; 
+.reviewer img{    width:  10%; 
+    min-width: 50px;
 }
 
 .reviewer>div{    font-weight: bold;
@@ -174,59 +197,49 @@ img {
 	clear: left;  
 }
 
-.hotel-review, .previous-reviews  {
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 10px;
-    background-color: #efefef;
+.hotel-review, .previous-reviews, .hotel-reviewers, .hotel-suggestion  {
+	margin-left: 0.6em;
+	margin-right: 0.6em;
+	margin-top: 0.2em;
+	margin-bottom: 0.4em;
+	padding-top: 0.8em;
+	padding-bottom: 1.2em;
+	padding-left: 0.8em;
+	padding-right: 0.8em;
+	border-radius: 0.8em;
+    background-color: #efefef;  
 }
 
 .hotel-review img {
     float: left;
     width: 30%;
     height: 30%;
-    margin-right:  10px; 
-    margin-bottom: 10px;   
+    margin-right:  0.8em; 
+    margin-bottom: 0.8em;   
 }
 
 .hotel-review .more {    font-weight: bold; 
 }
 
 h3 {
-	margin-top: 5px;
-	margin-bottom: 15px;
+	margin-top: 0.5em;
+	margin-bottom: 1em;
 }
 
-.hotel-reviewers {
+.hotel-reviewers, .hotel-suggestion {
     display:  inline-block;  
-	margin-left: 10px;
-	margin-right: 10px;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	padding-top: 15px;
-	padding-bottom: 15px;
-	padding-left: 10px;
-	padding-right: 10px;
-	border-radius: 10px;
-    background-color: #efefef;  
 }
 
 .hotel-reviewers img {
     width: 100px;
-    margin-right:  10px; 
-    margin-bottom: 10px;   
-    margin-left:  10px;
+    margin-right:  0.8em; 
+    margin-bottom: 0.8em;   
     float: left;
 }
 
 .reviewers-group {
-    margin: 20px;
+    margin-top: 1em;
+    margin-bottom: 2em;
     clear: both;
 }
 
@@ -240,21 +253,7 @@ h3 {
 }
 
 .reviewers-group>div p{
-    padding-top: 10px;
-}
-
-.hotel-suggestion {
-    display:  inline-block;
-	margin-left: 10px;
-	margin-right: 10px;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	padding-top: 15px;
-	padding-bottom: 15px;
-	padding-left: 10px;
-	padding-right: 10px;
-	border-radius: 10px;
-    background-color: #efefef;    
+    padding-bottom: 1em;
 }
 
 .hotel-suggestion .hotel-suggestion-images {
@@ -272,8 +271,8 @@ h3 {
 }
 
 #travel-cite{
-    padding-top:  20px;
-    padding-bottom: 20px;
+    padding-top:  1em;
+    padding-bottom: 1em;
     font-style: italic;
 }
 
