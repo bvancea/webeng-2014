@@ -15,18 +15,78 @@ ol, ul { list-style: none; }
 /*Application specific*/
 
 @media all and (max-width:479px) {
-  
+    #col-left {
+    }
+    #col-center {
+    }
+    #col-right {
+    }
 }
 
 @media all and (min-width:480px) and (max-width:767px) {
+    #container{
+        position: relative;
+    }
+    
+    #col-left {
+        width: 50%;
+        position:  absolute;
+        top:  0;
+        left:  0;
+    }
+    #col-center {
+        float: left;
+        width: 100%;
+        position:  absolute;
+        top: 550px;
+    }
+    #col-right {
+        position:  absolute;
+        top:  0;
+        right:  0;
+        float: right;
+        width: 50%;
+    }
+    #footer{
+        position:  absolute;
+        left: 1em;
+        top: 320px;
+    }
   
-}
+} 
 
 @media all and (min-width:768px) and (max-width:1023px) {
+    #col-left {
+	    width: 40%;	
+	    float: left;
+    }
+
+    #col-center {
+	    width: 60%;
+	    float: right;
+    }
+    #col-right {
+	    width:  40%;
+	    clear: left;
+    }
   
 }
 
 @media all and (min-width:1024px) {
+    #col-left {
+	    width: 15%;	
+	    float: left;
+    }
+
+    #col-center {
+	    width: 65%;
+	    float: left;
+
+    }
+    #col-right {
+	    width:  20%;
+	    float: right;
+    }
   
 }
 
@@ -73,9 +133,7 @@ a:link, a:visited {
 }
 
 #col-left {
-	width: 10%;	
-	float: left;
-	padding: 0.8em;
+	
 }
 
 #col-left a {
@@ -91,15 +149,7 @@ a:link, a:visited {
 }
 
 #col-center {
-	width: 65%;
-	float: left;
-	padding-top: 0.8em;
 	padding-bottom: 0.8em;
-}
-
-#col-right {
-	width:  20%;
-	float: right;
 }
 
 #col-right .orange-box span {
@@ -123,7 +173,6 @@ a:link, a:visited {
 
 #col-right .orange-box .reviewer-right{
     display:  inline-block;
-    clear:  left;
     padding-top: 0.4em;
     padding-bottom: 0.4em;
 }
@@ -157,7 +206,7 @@ img {
 
 .orange-box, .blue-box{
     margin: 0.4em;
-	padding: 0.4em;
+	padding: 0.8em;
 	border-radius: 0.8em;
 }
 
@@ -174,6 +223,7 @@ img {
     width: 20%;
     height: 20%;
     min-width: 30px;
+    max-width: 50px;
 }
 
 
@@ -194,16 +244,15 @@ img {
 
 .hotel-review {    
     display: inline-block;
-	clear: left;  
 }
 
 .hotel-review, .previous-reviews, .hotel-reviewers, .hotel-suggestion  {
-	margin-left: 0.6em;
-	margin-right: 0.6em;
+	margin-left: 0.2em;
+	margin-right: 0.2em;
 	margin-top: 0.2em;
 	margin-bottom: 0.4em;
 	padding-top: 0.8em;
-	padding-bottom: 1.2em;
+	padding-bottom: 0.8em;
 	padding-left: 0.8em;
 	padding-right: 0.8em;
 	border-radius: 0.8em;
@@ -216,6 +265,7 @@ img {
     height: 30%;
     margin-right:  0.8em; 
     margin-bottom: 0.8em;   
+    min-width: 100px;
 }
 
 .hotel-review .more {    font-weight: bold; 
