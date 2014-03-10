@@ -21,10 +21,31 @@ ol, ul { list-style: none; }
     }
     #col-right {
     }
+    #footer {
+    }
+
+    .title-top {
+        width: 100%;
+    }
+
+    .reviewers-group>div {
+        width: 48%;
+        padding-left: 1%;
+        padding-right: 1%;
+    }
+
+    .reviewer-info {
+        float: left;
+    }
+
+    .reviewers-group>div span{
+        float: left;
+        width: 100%;
+    }
 }
 
 @media all and (min-width:480px) and (max-width:767px) {
-    #container{
+   /* #container{
         position: relative;
     }
     
@@ -51,6 +72,23 @@ ol, ul { list-style: none; }
         position:  absolute;
         left: 1em;
         top: 320px;
+    }*/
+
+    #col-left {
+    }
+    #col-center {
+    }
+    #col-right {
+    }
+    #footer {
+    }
+
+    .title-top {
+        width: 100%;
+    }
+
+    .reviewers-group>div {
+        width: 100%;
     }
   
 } 
@@ -68,6 +106,19 @@ ol, ul { list-style: none; }
     #col-right {
 	    width:  40%;
 	    clear: left;
+    }
+    #footer {
+        width: 40%;
+        float: left;
+        padding-left: 0.4em;
+    }
+
+    .title-top {
+        width: 100%;
+    }
+
+    .reviewers-group>div {
+        width: 100%;
     }
   
 }
@@ -87,6 +138,16 @@ ol, ul { list-style: none; }
 	    width:  20%;
 	    float: right;
     }
+
+    .title-top {
+        width: 30%;
+    }
+
+    .reviewers-group>div {
+        width: 48%;
+        padding-left: 1%;
+        padding-right: 1%;
+    }
   
 }
 
@@ -105,7 +166,7 @@ a:link, a:visited {
 
 .title-top {
 	text-align: center;
-	width: 30%;
+	/*width: 30%;*/
 	margin: auto;
 	margin-bottom: 1.5em;
 
@@ -227,14 +288,19 @@ img {
 }
 
 
-.reviewer {    margin-top: 1em;    float:  right;    text-align: right; 
+.reviewer {
+    margin-top: 1em;
+    float:  right;
+    text-align: right; 
 }
 
-.reviewer img{    width:  10%; 
+.reviewer img{
+    width:  10%; 
     min-width: 50px;
 }
 
-.reviewer>div{    font-weight: bold;
+.reviewer>div{
+    font-weight: bold;
 }
 
 .previous-reviews {
@@ -268,7 +334,8 @@ img {
     min-width: 100px;
 }
 
-.hotel-review .more {    font-weight: bold; 
+.hotel-review .more {
+    font-weight: bold; 
 }
 
 h3 {
@@ -295,7 +362,7 @@ h3 {
 
 .reviewers-group>div {
     float: left;
-    width: 50%;
+    /*width: 50%;*/
 }
 
 .reviewers-group>div span{
@@ -330,4 +397,5 @@ h3 {
 
 
 
-
+
+
