@@ -30,8 +30,6 @@ ol, ul { list-style: none; }
 
     .reviewers-group>div {
         width: 100%;
-       /* padding-left: 1%;
-        padding-right: 1%;*/
     }
 
     .reviewer-info {
@@ -334,7 +332,6 @@ h3 {
 
 .reviewers-group>div {
     float: left;
-    /*width: 50%;*/
 }
 
 .reviewers-group>div span{
