@@ -45,35 +45,6 @@ ol, ul { list-style: none; }
 }
 
 @media all and (min-width:480px) and (max-width:767px) {
-   /* #container{
-        position: relative;
-    }
-    
-    #col-left {
-        width: 50%;
-        position:  absolute;
-        top:  0;
-        left:  0;
-    }
-    #col-center {
-        float: left;
-        width: 100%;
-        position:  absolute;
-        top: 550px;
-    }
-    #col-right {
-        position:  absolute;
-        top:  0;
-        right:  0;
-        float: right;
-        width: 50%;
-    }
-    #footer{
-        position:  absolute;
-        left: 1em;
-        top: 320px;
-    }*/
-
     #col-left {
     }
     #col-center {
