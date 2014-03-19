@@ -5,6 +5,20 @@ $(document).ready(function () {
     var animate = true;
     var direction = 0; //0 = right; 1 = left;
 
+    var resizeWindow = function () {
+        var smallWidth = $("#small-image").width();
+        var smallHeight = $("#small-image").height();
+        var panoramaWidth = $("#panorama-div").width();
+        var panoramaHeight = $("#panorama-div").height();
+        var borderWidth = $("#black-frame").css("border-width")
+        var scale = panoramaHeight / 1333.0;
+        var percentageShown = panoramaWidth / (6000.0 * scale);
+        var position = (backgroundPos / 100.0) * smallWidth * (1.0 - percentageShown);
+        $("#black-frame").css("height", smallHeight - 6);
+        $("#black-frame").css("width", smallWidth * percentageShown - 6);
+        return position;
+    }
+
     var animateImg = function () {
         //console.log("load was called");
         if (animate) {
@@ -18,22 +32,14 @@ $(document).ready(function () {
                 backgroundPos = 0;
                 direction = 0;
             }
-            var smallWidth = $("#small-image").width();
-            var smallHeight = $("#small-image").height();
-            var panoramaWidth = $("#panorama-div").width();
-            var panoramaHeight = $("#panorama-div").height();
-            var borderWidth = $("#black-frame").css("border-width")
-            var scale = panoramaHeight / 1333.0;
-            var percentageShown = panoramaWidth / (6000.0 * scale);
-            $("#black-frame").css("height", smallHeight - 6);
-            $("#black-frame").css("width", smallWidth * percentageShown);
+            var move=resizeWindow();
             $("#panorama-div").animate({ 'background-position-x': backgroundPos + '%' }, 100, function () {
                 animateImg();
-                $("#black-frame").css("left", backgroundPos + '%');
+                $("#black-frame").css("left", move + 'px');
             });
-           
-            //console.log("animating: " + direction + backgroundPos + " " + smallWidth + " " + smallHeight + " " + panoramaWidth + " " + panoramaHeight+" "+scale+" "+percentageShown);
-            
+
+            //console.log("animating: " + direction + " " + backgroundPos + " " + smallWidth + " " + smallHeight + " " + panoramaWidth + " " + panoramaHeight + " " + scale + " " + percentageShown);
+
         }
     }
 
@@ -69,5 +75,11 @@ $(document).ready(function () {
         }
     });
 
+    $(window).resize(function () {
+        var move=resizeWindow();
+        $("#black-frame").css("left", backgroundPos + '%');
+        //console.log("resize");
+    });
+
     animateImg();
-});     //end ready
+});        //end ready
