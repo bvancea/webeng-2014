@@ -5,6 +5,12 @@ $(document).ready(function () {
     var animate = true;
     var direction = 0; //0 = right; 1 = left;
 
+    var resizePanoramaAndFrame = function () {
+        $("#panorama-div").css('background-position-x', backgroundPos + '%');
+        var move=resizeWindow();
+        $("#black-frame").css("left", move + 'px');  
+    }
+
     var resizeWindow = function () {
         var smallWidth = $("#small-image").width();
         var smallHeight = $("#small-image").height();
@@ -69,15 +75,35 @@ $(document).ready(function () {
             if (backgroundPos > 100) backgroundPos = 100;
             if (backgroundPos < 0) backgroundPos = 0;
 
-            $("#panorama-div").css('background-position-x', backgroundPos + '%');
-            $("#black-frame").css("left", backgroundPos + '%');
-            //console.log("move: " + backgroundPos);
+            resizePanoramaAndFrame();            
         }
     });
 
+    $("#small-image-wrapper").mousedown(function (e) {
+        if (animate == true) {
+            animate = false;
+            return;
+        }
+        var clickPos = e.pageX;
+        var startImage = $("#small-image").position().left;
+        var smallImageWidth = $("#small-image").width();
+        var endImage = startImage + smallImageWidth;
+        if (clickPos > startImage && clickPos < endImage) {
+            var offsetInsideSmallImage = clickPos - startImage;
+            var offsetPercentage = 100 * offsetInsideSmallImage / smallImageWidth;
+            //animate = false;
+            console.log("Animate: " + animate);
+            console.log("Down: " + down);
+            console.log("backgroundPos: " + backgroundPos);
+            backgroundPos = offsetPercentage;
+            resizePanoramaAndFrame();            
+        }
+    })
+
     $(window).resize(function () {
+        resizePanoramaAndFrame()
         var move=resizeWindow();
-        $("#black-frame").css("left", backgroundPos + '%');
+        $("#black-frame").css("left", move + 'px');
         //console.log("resize");
     });
 
