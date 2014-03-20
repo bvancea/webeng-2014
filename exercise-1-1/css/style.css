@@ -369,6 +369,20 @@ h3 {
     height: 50%;
 }
 
+#black-frame-container{
+    position: absolute;
+}
+
+#black-frame{
+    position: relative;
+    text-align: center;
+    border: 3px solid red;
+    border-radius: 0.8em;
+    z-index: 1;
+    padding:  0px;
+    margin:  0px;
+}
+
 #travel-cite{
     padding-top:  1em;
     padding-bottom: 1em;

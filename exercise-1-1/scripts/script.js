@@ -1,39 +1,85 @@
-$(document).ready(function(){
-	var backgroundPos = 0;
-	var down = false;
-	var clickPosition;
+$(document).ready(function () {
+    var backgroundPos = 0;
+    var down = false;
+    var clickPosition;
+    var animate = true;
+    var direction = 0; //0 = right; 1 = left;
 
-	$("#panorama-div").mousedown(function(e) {
-		clickPosition = e.pageX;
-		down = true;
+    var resizeWindow = function () {
+        var smallWidth = $("#small-image").width();
+        var smallHeight = $("#small-image").height();
+        var panoramaWidth = $("#panorama-div").width();
+        var panoramaHeight = $("#panorama-div").height();
+        var borderWidth = $("#black-frame").css("border-width")
+        var scale = panoramaHeight / 1333.0;
+        var percentageShown = panoramaWidth / (6000.0 * scale);
+        var position = (backgroundPos / 100.0) * smallWidth * (1.0 - percentageShown);
+        $("#black-frame").css("height", smallHeight - 6);
+        $("#black-frame").css("width", smallWidth * percentageShown - 6);
+        return position;
+    }
 
-		console.log("down: " + clickPosition);
-	});
+    var animateImg = function () {
+        //console.log("load was called");
+        if (animate) {
+            if (direction == 0) backgroundPos++;
+            else backgroundPos--;
+            if (direction == 0 && backgroundPos > 100) {
+                backgroundPos = 100;
+                direction = 1;
+            }
+            if (direction == 1 && backgroundPos < 0) {
+                backgroundPos = 0;
+                direction = 0;
+            }
+            var move=resizeWindow();
+            $("#panorama-div").animate({ 'background-position-x': backgroundPos + '%' }, 100, function () {
+                animateImg();
+                $("#black-frame").css("left", move + 'px');
+            });
 
-	$("#panorama-div").mouseup(function(e) {
-		down = false;
-		console.log("up: " + clickPosition);
-	});
+            //console.log("animating: " + direction + " " + backgroundPos + " " + smallWidth + " " + smallHeight + " " + panoramaWidth + " " + panoramaHeight + " " + scale + " " + percentageShown);
 
-	$("#panorama-div").mouseout(function(e) {
-		down = false;
-		console.log("up: " + clickPosition);
-	});
+        }
+    }
 
-	$("#panorama-div").mousemove(function(e) {
-		if (down) {
-			var newPosition = e.pageX;
-			var dif = clickPosition - newPosition;
-			clickPosition = newPosition;
-			backgroundPos += dif/10;
-			if (backgroundPos > 100) backgroundPos = 100;
-			if (backgroundPos < 0) backgroundPos = 0;
+    $("#panorama-div").mousedown(function (e) {
+        clickPosition = e.pageX;
+        down = true;
+        animate = false;
+        //console.log("down: " + clickPosition);
+    });
 
-			$("#panorama-div").css('background-position-x', backgroundPos+'%');
+    $("#panorama-div").mouseup(function (e) {
+        down = false;
+        //console.log("up: " + clickPosition);
+    });
 
-			console.log("move: " + backgroundPos);
-		}
-	});
+    $("#panorama-div").mouseout(function (e) {
+        down = false;
+        //console.log("out: " + clickPosition);
+    });
 
+    $("#panorama-div").mousemove(function (e) {
+        if (down) {
+            var newPosition = e.pageX;
+            var dif = clickPosition - newPosition;
+            clickPosition = newPosition;
+            backgroundPos += dif / 10;
+            if (backgroundPos > 100) backgroundPos = 100;
+            if (backgroundPos < 0) backgroundPos = 0;
 
-});//end ready
+            $("#panorama-div").css('background-position-x', backgroundPos + '%');
+            $("#black-frame").css("left", backgroundPos + '%');
+            //console.log("move: " + backgroundPos);
+        }
+    });
+
+    $(window).resize(function () {
+        var move=resizeWindow();
+        $("#black-frame").css("left", backgroundPos + '%');
+        //console.log("resize");
+    });
+
+    animateImg();
+});        //end ready
