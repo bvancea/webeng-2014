@@ -113,7 +113,7 @@ $(document).ready(function () {
 });        //end ready
 
 var animationStopped=false;
-
+var timer;
 $.touch.triggerMouseEvents = true;
 $.touch.preventDefault = false;
 $.touch.ready(function() {
@@ -136,7 +136,15 @@ $.touch.ready(function() {
 					messageSwipe('swipe right');
 				 }
 		},
-		touchMove: function(e, touchHistory) {            
+		touchMove: function(e, touchHistory) {
+            if(!animationStopped){
+                animationStopped=true;
+                animate=false;
+                resizePanoramaAndFrame();  
+            }
+            $.touch.preventDefault = true;
+            window.clearInterval(timer);
+            timer=setInterval(function(){$.touch.preventDefault = false;},100);            
 			var swipeLen=touchHistory.get(0).clientX-e.clientX;
 			message(swipeLen);
             backgroundPos+=swipeLen/5.0;
