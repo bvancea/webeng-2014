@@ -1,9 +1,8 @@
-$(document).ready(function () {
-    var backgroundPos = 0;
-    var down = false;
-    var clickPosition;
-    var animate = true;
-    var direction = 0; //0 = right; 1 = left;
+var backgroundPos = 0;
+var down = false;
+var clickPosition;
+var animate = true;
+var direction = 0; //0 = right; 1 = left;
 
     var resizePanoramaAndFrame = function () {
         $("#panorama-div").css('background-position-x', backgroundPos + '%');
@@ -16,6 +15,8 @@ $(document).ready(function () {
         var smallHeight = $("#small-image").height();
         var panoramaWidth = $("#panorama-div").width();
         var panoramaHeight = $("#panorama-div").height();
+        $('#moving-canvas').width(panoramaWidth);
+        $('#moving-canvas').height(panoramaHeight);
         var borderWidth = $("#black-frame").css("border-width")
         var scale = panoramaHeight / 1333.0;
         var percentageShown = panoramaWidth / (6000.0 * scale);
@@ -25,6 +26,7 @@ $(document).ready(function () {
         return position;
     }
 
+$(document).ready(function () {
     var animateImg = function () {
         //console.log("load was called");
         if (animate) {
@@ -109,3 +111,54 @@ $(document).ready(function () {
 
     animateImg();
 });        //end ready
+
+var animationStopped=false;
+
+$.touch.triggerMouseEvents = true;
+$.touch.preventDefault = false;
+$.touch.ready(function() {
+	$('#moving-canvas').touchable({
+
+		gesture: function(e, touchHistory) {
+            //$.touch.preventDefault = true;
+			var touches = $(this).touches();
+				var th = touchHistory;
+				th = th.stop({
+					type: ['touchdown', 'touchup']
+				});
+				th = th.filter({
+					type: 'touchmove',
+					time: '1..100'
+				});
+				if (th.match({ deltaX: '<-100' })) {
+					messageSwipe('swipe left');
+				} else if (th.match({ deltaX: '>100' })) {
+					messageSwipe('swipe right');
+				 }
+		},
+		touchMove: function(e, touchHistory) {            
+			var swipeLen=touchHistory.get(0).clientX-e.clientX;
+			message(swipeLen);
+            backgroundPos+=swipeLen/5.0;
+            if (backgroundPos > 100) backgroundPos = 100;
+            if (backgroundPos < 0) backgroundPos = 0;
+            resizePanoramaAndFrame();  
+            //$.touch.preventDefault = false;
+		},
+		touchUp: function(e, touchHistory) {
+            if(!animationStopped){
+                animationStopped=true;
+                animate=false;
+                resizePanoramaAndFrame();  
+            }
+		},
+	});
+
+	function messageSwipe(s) {
+		$('#moving-coordinates').html(s);
+	}
+
+    function message(s) {
+		$('#moving-coordinates').html(s);
+	}
+});

@@ -396,6 +396,21 @@ h3 {
     background-repeat: no-repeat;
 }
 
+#moving-canvas-container{
+    position: absolute;
+}
+
+#moving-canvas{
+    position: relative;
+    /*background: rgba(255, 0, 0, 0.3);*/
+}
+
+#moving-coordinates{
+    position: relative;
+    bottom: 20px;
+    color: red;
+} 
+
 
 
 

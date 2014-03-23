@@ -2,15 +2,17 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
 	<title>Evaluate Thy Hotel</title>
-	-<link rel="stylesheet" href="css\style.css" type="text/css" charset="utf-8" />
+	<link rel="stylesheet" href="css\style.css" type="text/css" charset="utf-8" />
+    <link href="css/jquery.multitouch.css" rel="stylesheet">
 	<script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/jquery.multitouch.js"></script>
 	<script src="scripts/script.js"></script>
 </head>
 <body>
 
 	<div id="content">
-
 		<div id="header">
 			<h1 class="title-top">
 				<a href="#">Evaluate Thy Hotel</a>
@@ -42,6 +44,11 @@
 					<div >
 						<h3><a href="#">ETH suggests..</a></h1>
 							<div >
+                                
+                                <span id="moving-canvas-container">
+                                    <canvas id="moving-canvas"></canvas>
+                                    <div id="moving-coordinates"></div>
+                                </span>
 								<!-- <div class="hotel-suggestion-images" ><img id="big-image"  src='images/sydney-harbour-panorama1bl.jpg'></div> -->
 								<div id="panorama-div" class="hotel-suggestion-images" >
 									<!-- <canvas id="panorama" ></canvas> -->
@@ -125,7 +132,6 @@
 				</div>
 			</div>	
 		</div>
-		
 		<script>init();</script>
 	</body>
 	</html>
