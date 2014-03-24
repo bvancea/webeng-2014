@@ -4,6 +4,18 @@ var clickPosition;
 var animate = true;
 var direction = 0; //0 = right; 1 = left;
 
+var speed, amplitude;
+var ticker;
+
+var mousedownTimestamp;
+var mouseupTimestamp;
+var mousedownLocation;
+var mouseupLocation;
+var positionRef;
+var target;
+var timeConst = 325;
+
+
     var resizePanoramaAndFrame = function () {
         $("#panorama-div").css('background-position-x', backgroundPos + '%');
         var move=resizeWindow();
@@ -42,7 +54,7 @@ $(document).ready(function () {
             }
             var move=resizeWindow();
             $("#panorama-div").animate({ 'background-position-x': backgroundPos + '%' }, 100, function () {
-                animateImg();
+                requestAnimationFrame(animateImg);
                 $("#black-frame").css("left", move + 'px');
             });
 
@@ -51,15 +63,66 @@ $(document).ready(function () {
         }
     }
 
+    var track = function() {
+    	var ts = Date.now();
+    	var timeDiff = ts - mousedownTimestamp;
+    	mousedownTimestamp = ts;
+
+    	var spaceDiff = backgroundPos - positionRef;
+    	positionRef = backgroundPos;
+
+    	var v = 1000*spaceDiff / (1 + timeDiff);
+    	speed = 0.8 * v + 0.2 * speed;
+    }
+
+    var momentum = function() {
+    	var timeDiff, spaceDiff;
+    	if (amplitude != 0) {
+    		timeDiff = Date.now() - mouseupTimestamp;
+    		spaceDiff = -amplitude * Math.exp(-timeDiff/timeConst);
+    		if (spaceDiff > 0.5 || spaceDiff < -0.5) {
+	            backgroundPos = target + spaceDiff;
+	            if (backgroundPos > 100) backgroundPos = 100;
+	            if (backgroundPos < 0) backgroundPos = 0;
+	            resizePanoramaAndFrame();
+	            requestAnimationFrame(momentum);
+	        } else {
+	            backgroundPos = target;
+	            if (backgroundPos > 100) backgroundPos = 100;
+	            if (backgroundPos < 0) backgroundPos = 0;
+	            resizePanoramaAndFrame();
+	        }
+    	}
+    }
+
     $("#panorama-div").mousedown(function (e) {
         clickPosition = e.pageX;
         down = true;
         animate = false;
-        //console.log("down: " + clickPosition);
+
+        positionRef = backgroundPos;
+
+        speed = 0;
+        amplitude = 0;
+	    mousedownTimestamp = Date.now();
+	    clearInterval(ticker);
+	    ticker = setInterval(track, 100);
+
+        console.log("down: " + clickPosition);
     });
 
     $("#panorama-div").mouseup(function (e) {
         down = false;
+        positionRef = backgroundPos;
+
+        clearInterval(ticker);
+
+        //if (speed > 1 || speed < -1) {
+	        amplitude = 0.8 * speed;
+	        target = Math.round(positionRef + amplitude);
+	        mouseupTimestamp = Date.now();
+	        requestAnimationFrame(momentum);
+	    //}
         //console.log("up: " + clickPosition);
     });
 
@@ -77,7 +140,9 @@ $(document).ready(function () {
             if (backgroundPos > 100) backgroundPos = 100;
             if (backgroundPos < 0) backgroundPos = 0;
 
-            resizePanoramaAndFrame();            
+            resizePanoramaAndFrame();  
+
+            console.log("Mouse move called");          
         }
     });
 
@@ -109,15 +174,15 @@ $(document).ready(function () {
         //console.log("resize");
     });
 
-    animateImg();
+    requestAnimationFrame(animateImg);
 });        //end ready
 
 var animationStopped=false;
 var timer;
-$.touch.triggerMouseEvents = true;
+$.touch.triggerMouseEvents = false;
 $.touch.preventDefault = false;
 $.touch.ready(function() {
-	$('#moving-canvas').touchable({
+	$('#panorama-div').touchable({
 
 		gesture: function(e, touchHistory) {
             //$.touch.preventDefault = true;
@@ -131,9 +196,9 @@ $.touch.ready(function() {
 					time: '1..100'
 				});
 				if (th.match({ deltaX: '<-100' })) {
-					messageSwipe('swipe left');
+					//messageSwipe('swipe left');
 				} else if (th.match({ deltaX: '>100' })) {
-					messageSwipe('swipe right');
+					//messageSwipe('swipe right');
 				 }
 		},
 		touchMove: function(e, touchHistory) {
@@ -146,12 +211,14 @@ $.touch.ready(function() {
             window.clearInterval(timer);
             timer=setInterval(function(){$.touch.preventDefault = false;},100);            
 			var swipeLen=touchHistory.get(0).clientX-e.clientX;
-			message(swipeLen);
+			//message(swipeLen);
             backgroundPos+=swipeLen/5.0;
             if (backgroundPos > 100) backgroundPos = 100;
             if (backgroundPos < 0) backgroundPos = 0;
             resizePanoramaAndFrame();  
             //$.touch.preventDefault = false;
+
+            console.log("Touch move called");
 		},
 		touchUp: function(e, touchHistory) {
             if(!animationStopped){
@@ -162,11 +229,11 @@ $.touch.ready(function() {
 		},
 	});
 
-	function messageSwipe(s) {
+	/*function messageSwipe(s) {
 		$('#moving-coordinates').html(s);
 	}
 
     function message(s) {
 		$('#moving-coordinates').html(s);
-	}
+	}*/
 });

@@ -1,7 +1,7 @@
 var forward;
 var backward;
 
-$.touch.triggerMouseEvents = true;
+$.touch.triggerMouseEvents = false;
 $.touch.preventDefault = false;
 
 function setNavigationOrder(f,b){
