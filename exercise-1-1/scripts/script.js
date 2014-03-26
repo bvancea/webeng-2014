@@ -184,23 +184,6 @@ $.touch.preventDefault = false;
 $.touch.ready(function() {
 	$('#panorama-div').touchable({
 
-		gesture: function(e, touchHistory) {
-            //$.touch.preventDefault = true;
-			var touches = $(this).touches();
-				var th = touchHistory;
-				th = th.stop({
-					type: ['touchdown', 'touchup']
-				});
-				th = th.filter({
-					type: 'touchmove',
-					time: '1..100'
-				});
-				if (th.match({ deltaX: '<-100' })) {
-					//messageSwipe('swipe left');
-				} else if (th.match({ deltaX: '>100' })) {
-					//messageSwipe('swipe right');
-				 }
-		},
 		touchMove: function(e, touchHistory) {
             if(!animationStopped){
                 animationStopped=true;
@@ -211,13 +194,10 @@ $.touch.ready(function() {
             window.clearInterval(timer);
             timer=setInterval(function(){$.touch.preventDefault = false;},100);            
 			var swipeLen=touchHistory.get(0).clientX-e.clientX;
-			//message(swipeLen);
             backgroundPos+=swipeLen/5.0;
             if (backgroundPos > 100) backgroundPos = 100;
             if (backgroundPos < 0) backgroundPos = 0;
             resizePanoramaAndFrame();  
-            //$.touch.preventDefault = false;
-
             console.log("Touch move called");
 		},
 		touchUp: function(e, touchHistory) {
@@ -229,11 +209,7 @@ $.touch.ready(function() {
 		},
 	});
 
-	/*function messageSwipe(s) {
-		$('#moving-coordinates').html(s);
-	}
-
-    function message(s) {
+	/*function message(s) {
 		$('#moving-coordinates').html(s);
 	}*/
 });
