@@ -1,0 +1,425 @@
+/*
+Theme Name: Evaluate Thy Hotel
+Theme URI: http://localhost/hotel
+Author: Bogdan Vancea, Alexandra Trif, Jakub Szymanek
+Author URI: http://localhost/hotel
+Description: Web Engineering 2014
+Version: 1.0
+*/
+
+/* Style reset*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, 
+h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, 
+big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, 
+samp, small, strike, strong, sub, sup, tt, var, b, u, i, 
+center, dl, dt, dd, ol, ul, li, fieldset, form, label, 
+legend, table, caption, tbody, tfoot, thead, tr, th, td {
+margin: 0; padding: 0; border: 0; outline: 0; 
+font-size: 100%; vertical-align: baseline; 
+background: transparent; }
+body { line-height: 1; }
+ol, ul { list-style: none; }
+
+/*Application specific*/
+
+/* Mobile-portrait */
+@media all and (max-width:479px) {
+    #col-left {
+    }
+    #col-center {
+    }
+    #col-right {
+    }
+    #footer {
+    }
+    #panorama-div {
+        height: 10em;
+    }
+    .title-top {
+        width: 100%;
+    }
+
+    .reviewers-group>article {
+        width: 100%;
+    }
+
+    .reviewer-info {
+        float: left;
+    }
+
+    .reviewers-group>article span{
+        float: left;
+        width: 100%;
+    }
+}
+
+/* Mobile-lanscape */
+@media all and (min-width:480px) and (max-width:767px) {
+    #col-left {
+    }
+    #col-center {
+    }
+    #col-right {
+    }
+    #footer {
+    }
+    #panorama-div {
+        height: 10em;
+    }
+    .title-top {
+        width: 100%;
+    }
+
+    .reviewers-group>article {
+        width: 100%;
+    }
+  
+} 
+
+/* Tablet-portrait */
+@media all and (min-width:768px) and (max-width:1023px) {
+    #col-left {
+	    width: 40%;	
+	    float: left;
+    }
+
+    #col-center {
+	    width: 60%;
+	    float: right;
+    }
+    #col-right {
+	    width:  40%;
+	    clear: left;
+    }
+    #footer {
+        width: 40%;
+        float: left;
+        padding-left: 0.4em;
+    }
+
+    .title-top {
+        width: 100%;
+    }
+
+    .reviewers-group>article {
+        width: 100%;
+    }
+    #panorama-div {
+        height: 15em;
+    }
+  
+}
+
+/* Tablet-landscape and desktop */
+@media all and (min-width:1024px) {
+    #col-left {
+	    width: 15%;	
+	    float: left;
+    }
+
+    #col-center {
+	    width: 65%;
+	    float: left;
+
+    }
+    #col-right {
+	    width:  20%;
+	    float: right;
+    }
+
+    .title-top {
+        width: 30%;
+    }
+
+    .reviewers-group>article {
+        width: 48%;
+        padding-left: 1%;
+        padding-right: 1%;
+    }
+    #panorama-div {
+        height: 25em;
+    }
+}
+
+
+body {
+	background-color:#efefef;
+	font-family: "Arial";
+}
+
+a {
+	text-decoration: none;
+}
+a:link, a:visited {
+	color: black;
+}
+
+.title-top {
+	text-align: center;
+	/*width: 30%;*/
+	margin: auto;
+	margin-bottom: 1.5em;
+
+}
+
+.title-top a {
+	font-size: 2em;
+}
+
+#nav-top {
+    text-align: center;
+	width: 100%;
+	margin: auto;
+}
+
+#nav-top li {
+	display: inline-block; 
+	padding: 0.4em;
+	background-color: #ffc45e;
+	border: 2px solid #dfdfdf;
+}
+
+#menu-top {
+	margin-bottom: 1em;
+}
+
+#col-left {
+	
+}
+
+#col-left a {
+	display: block;
+	border-bottom: 2px solid #efefef;
+	margin-top: 5px;
+}
+
+#menu-title {
+	background-color: #efefef;
+	text-align: center;
+	font-weight: bold;
+}
+
+#col-center {
+	padding-bottom: 0.8em;
+}
+
+#col-right .orange-box span {
+    display:  inline-block;
+	font-weight: bold;
+    padding-bottom: 0.8em;
+}
+
+#col-right .orange-box a {
+    display:  inline-block;
+	font-weight: bold;
+}
+
+#col-right .orange-box img {
+    width: 90%;
+}
+
+#col-right .orange-box #contest {
+    width: 100%;
+}
+
+#col-right .orange-box .reviewer-right{
+    display:  inline-block;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+}
+
+
+#col-right .orange-box .reviewer-right img{
+    float: left;
+	width: 30%;
+    min-width: 50px;
+}
+
+#col-right #col-right-center {
+    text-align: center;
+}
+
+
+#footer {
+    clear:  both;
+	width: 70%;
+	margin: auto;
+    color: #808080;
+}
+
+.footer-menu {
+	display: inline-block;
+}
+
+img {
+	border-radius: 0.8em;
+}
+
+.orange-box, .blue-box{
+    margin: 0.4em;
+	padding: 0.8em;
+	border-radius: 0.8em;
+}
+
+.orange-box {
+	background-color: #ffc45e;
+}
+
+.blue-box {
+	background-color: #3b73db;
+    text-align: center;
+}
+
+.blue-box img {
+    width: 20%;
+    min-width: 30px;
+    max-width: 50px;
+}
+
+
+.reviewer {
+    margin-top: 1em;
+    float:  right;
+    text-align: right; 
+}
+
+.reviewer img{
+    width:  10%; 
+    min-width: 50px;
+}
+
+.reviewer>div{
+    font-weight: bold;
+}
+
+.previous-reviews {
+    text-align: center; 
+    font-weight: bold;
+}
+
+.hotel-review {    
+    display: inline-block;
+}
+
+.hotel-review, .previous-reviews, .hotel-reviewers, .hotel-suggestion  {
+	margin-left: 0.2em;
+	margin-right: 0.2em;
+	margin-top: 0.2em;
+	margin-bottom: 0.4em;
+	padding-top: 0.8em;
+	padding-bottom: 0.8em;
+	padding-left: 0.8em;
+	padding-right: 0.8em;
+	border-radius: 0.8em;
+    background-color: #efefef;  
+}
+
+.hotel-review img {
+    float: left;
+    width: 30%;
+    margin-right:  0.8em; 
+    margin-bottom: 0.8em;   
+    min-width: 100px;
+}
+
+.hotel-review .more {
+    font-weight: bold; 
+}
+
+h3 {
+	margin-top: 0.5em;
+	margin-bottom: 1em;
+}
+
+.hotel-reviewers, .hotel-suggestion {
+    display:  inline-block;  
+}
+
+.hotel-reviewers img {
+    width: 100px;
+    margin-right:  0.8em; 
+    margin-bottom: 0.8em;   
+    float: left;
+}
+
+.reviewers-group {
+    margin-top: 1em;
+    margin-bottom: 2em;
+    clear: both;
+}
+
+.reviewers-group>article {
+    float: left;
+}
+
+.reviewers-group>article span{
+    font-weight: bold;
+}
+
+.reviewers-group>article p{
+    padding-bottom: 1em;
+}
+
+.hotel-suggestion .hotel-suggestion-images {
+    text-align: center; 
+}
+
+.hotel-suggestion #big-image {
+    width: 100%;
+    height: 100%;
+}
+
+.hotel-suggestion #small-image  {
+    width: 50%;
+    height: 50%;
+}
+
+#black-frame-container{
+    position: absolute;
+}
+
+#black-frame{
+    position: relative;
+    text-align: center;
+    border: 3px solid black;
+    border-radius: 0.8em;
+    z-index: 1;
+    padding:  0px;
+    margin:  0px;
+}
+
+#travel-cite{
+    padding-top:  1em;
+    padding-bottom: 1em;
+    font-style: italic;
+}
+
+#panorama-div {
+    background-image: url(../images/sydney-harbour-panorama1bl.jpg);
+    background-position: 0% 0%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#moving-canvas-container{
+    position: absolute;
+}
+
+#moving-canvas{
+    position: relative;
+    /*background: rgba(255, 0, 0, 0.3);*/
+}
+
+#moving-coordinates{
+    position: relative;
+    bottom: 20px;
+    color: red;
+} 
+
+
+
+
+
+
+
