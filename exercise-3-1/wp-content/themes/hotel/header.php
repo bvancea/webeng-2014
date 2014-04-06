@@ -1,11 +1,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title><?php bloginfo( 'title' ); ?></title>
-    <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>" type="text/css" />
-    <link href="css/jquery.multitouch.css" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="js/jquery.multitouch.js"></script>
-    <script src="scripts/navigation.js"></script>
+    <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" />
+    <link href="<?php bloginfo('template_directory');?>/css/jquery.multitouch.css" rel="stylesheet">
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<script src="<?php bloginfo('template_directory');?>/js/jquery.multitouch.js"></script>
+	<script src="<?php bloginfo('template_directory');?>/js/script.js"></script>
+	<script src="<?php bloginfo('template_directory');?>/js/navigation.js"></script>
     <script>setNavigationOrder('weekly.html', 'reviewers.html');</script>
     <?php wp_head(); ?>
 </head>
@@ -33,7 +34,8 @@
                     'link_after'      => '',
                     'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
                     'depth'           => 0,
-                    'walker'          => ''
+                    'walker'          => '',
+	                'show_home'       => 'Home - ASDF'
                 );
                 
                 wp_nav_menu( $defaults );
