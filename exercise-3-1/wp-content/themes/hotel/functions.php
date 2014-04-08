@@ -4,6 +4,10 @@ function register_my_menu() {
 }
 add_action( 'init', 'register_my_menu' );
 
+/**
+ * Post thumbnails are only supported if this function is called explicitly
+ */
+add_theme_support( 'post-thumbnails' );
 
 /**
  * Custom reviewer type
@@ -37,7 +41,7 @@ if (!function_exists('create_reviewer_post_type')):
             'hierarchical' => false,
             'supports' => array(
                 'title',
-                'thumbnail',
+                'thumbnail'
             ),
             'menu_position' => 5,
             'register_meta_box_cb' => 'add_viewer_post_type_metabox'
@@ -45,7 +49,7 @@ if (!function_exists('create_reviewer_post_type')):
 
         register_post_type( 'reviewer', $args);
 
-        register_taxonomy( 'custom_category', 'reviewer', array(
+        register_taxonomy( 'reviewer_category', 'reviewer', array(
             'hierarchical' => true,
             'label' => 'Reviewer Role'
         ));
@@ -58,15 +62,10 @@ if (!function_exists('create_reviewer_post_type')):
     function reviewer_metabox() {
         global $post;
         $custom = get_post_custom($post->ID);
-        $pname = $custom['reviewer_pname'][0];
         $quote = $custom['reviewer_quote'][0];
         $relevance = $custom['reviewer_relevance'][0]; ?>
 
         <div class="reviewer">
-            <p>
-                <label>Name</label> <br/>
-                <input type="text" name="pname" size="50" value="<?php echo $pname ; ?>"/>
-            </p>
             <p>
                 <label>Relevance</label> <br/>
                 <select name="relevance">
@@ -91,7 +90,6 @@ if (!function_exists('create_reviewer_post_type')):
             return $post->ID;
         }
 
-        $reviewer_post_meta['reviewer_pname'] = $_POST['pname'];
         $reviewer_post_meta['reviewer_quote'] = $_POST['quote'];
         $reviewer_post_meta['reviewer_relevance'] = $_POST['relevance'];
 
@@ -112,19 +110,12 @@ if (!function_exists('create_reviewer_post_type')):
     function reviewer_taxonomy_columns($defaults) {
         unset($defaults['date']);
         return $defaults + array(
-            'reviewer_pname' => __('Name'),
             'reviewer_relevance' => __('Relevance')
         );
     }
     add_action('manage_posts_custom_column', 'reviewer_custom_column', 10, 2);
     function reviewer_custom_column($column, $id) {
         switch($column) {
-            case 'reviewer_pname':
-                $pname = get_post_meta($id, 'reviewer_pname', true);
-                if(!empty($pname)) {
-                    echo esc_html($pname);
-                }
-                break;
             case 'reviewer_relevance':
                 $relevance = get_post_meta($id, 'reviewer_relevance', true);
                 if(!empty($relevance)) {

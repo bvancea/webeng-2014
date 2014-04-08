@@ -233,6 +233,7 @@ a:link, a:visited {
 #col-right .orange-box .reviewer-right img{
     float: left;
 	width: 30%;
+    height: 12%;
     min-width: 50px;
 }
 

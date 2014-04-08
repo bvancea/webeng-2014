@@ -1,20 +1,31 @@
 <header>
     <h3>Meet our reviewers!</h3>
 </header>
-<div class="reviewer-right">
-    <img src="<?php bloginfo('stylesheet_directory'); ?>/images/mranderson.jpg" alt="" />
-    <span>Mr Anderson</span>
-    <div>
-        CEO, Main Reviewer
+<?php
+    $loop = new WP_Query(
+        array(
+            'post_type' => 'reviewer',
+            'posts_per_page' => 2,
+            'meta_key' => 'reviewer_relevance',
+            'orderby' => 'meta_value',
+            'order' => 'ASC'
+        )
+    );
+
+    while ($loop->have_posts()):
+        $loop->the_post();
+?>
+
+    <div class="reviewer-right">
+        <?php the_post_thumbnail() ?>
+        <span><?php the_title() ?></span>
+        <div>
+            <?php the_terms(get_the_ID(), 'reviewer_category') ?>
+        </div>
     </div>
-</div>
-<div class="reviewer-right">
-    <img src="<?php bloginfo('stylesheet_directory'); ?>/images/trinity.jpg" alt="" />
-    <span>Ms Trinity</span>
-    <div>
-        Assistant, Reviewer, Board Member
-    </div>
-</div>
+<?php
+    endwhile;
+?>
 <footer>
     <a href="#">Meet them all!</a>
 </footer>
