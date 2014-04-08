@@ -22,16 +22,10 @@ get_header();
 					        <h3><?php the_title(); ?></h3>
 						</header>
 						<div>
-							<div id="panorama-div" class="hotel-suggestion-images" >
-							</div>
-							<div id="small-image-wrapper" class="hotel-suggestion-images">
-								<div>
-									<span id="black-frame-container">
-										<canvas id="black-frame"></canvas>
-									</span>
-									<img id="small-image"  src='<?php echo bloginfo('template_directory');?>/images/sydney-harbour-panorama1bl-thumbnail.jpg'/>
-								</div>
-							</div>
+                            <?php
+                            $small_image = get_bloginfo('template_directory') .'/images/sydney-harbour-panorama1bl-thumbnail.jpg';
+                            panorama_image($small_image);
+                            ?>
 							<?php the_content('<br><span class="more">Read more...</span>'); ?>
 							<aside class="reviewer">
 								<a href="#"><?php the_time('M j') ?> by <?php the_author();?></a>

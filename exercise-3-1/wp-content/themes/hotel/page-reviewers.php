@@ -13,6 +13,9 @@ get_header();
     <section id="col-center">
         <div class="orange-box">
             <div class="hotel-reviewers">
+                <header>
+                    <h1>Our reviewers </h1>
+                </header>
                 <?php
                 $loop = new WP_Query(
                     array(
