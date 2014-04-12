@@ -8,7 +8,6 @@ add_action( 'init', 'register_my_menu' );
  * Post thumbnails are only supported if this function is called explicitly
  */
 add_theme_support( 'post-thumbnails' );
-
 /**
  * Custom reviewer type
  *
@@ -129,3 +128,107 @@ if (!function_exists('create_reviewer_post_type')):
 
     add_action( 'init', 'create_reviewer_post_type');
 endif;
+
+//Customize colors
+function hotel_customize_register( $wp_customize ) {
+	//All our sections, settings, and controls will be added here
+	$colors = array();
+	$colors[] = array(
+		'slug'=>'background_color',
+		'default' => '#efefef',
+		'label' => __('Background Color', 'hotel')
+	);
+
+	$colors[] = array(
+		'slug'=>'box_color',
+		'default' => '#ffc45e',
+		'label' => __('Box Color', 'hotel')
+	);
+
+	$colors[] = array(
+		'slug'=>'navigation_color',
+		'default' => '#ffc45e',
+		'label' => __('Navigation Menu Color', 'hotel')
+	);
+
+	$colors[] = array(
+		'slug'=>'navigation_border_color',
+		'default' => '#dfdfdf',
+		'label' => __('Navigation Menu Border Color', 'hotel')
+	);
+
+	$colors[] = array(
+		'slug'=>'posts_color',
+		'default' => '#efefef',
+		'label' => __('Posts Background Color', 'hotel')
+	);
+
+	$colors[] = array(
+		'slug'=>'title_color',
+		'default' => '#000000',
+		'label' => __('Title Color', 'hotel')
+	);
+
+	$colors[] = array(
+		'slug'=>'title_color',
+		'default' => '#000000',
+		'label' => __('Title Color', 'hotel')
+	);
+
+	$colors[] = array(
+		'slug'=>'headlines_color',
+		'default' => '#000000',
+		'label' => __('Headlines Color', 'hotel')
+	);
+
+	$colors[] = array(
+		'slug'=>'text_color',
+		'default' => '#000000',
+		'label' => __('Text Color', 'hotel')
+	);
+
+	$colors[] = array(
+		'slug'=>'other_text_color',
+		'default' => '#000000',
+		'label' => __('Menu, Navigation and Sidebars Text Color', 'hotel')
+	);
+
+	foreach( $colors as $color ) {
+		// SETTINGS
+		$wp_customize->add_setting(
+			$color['slug'], array(
+				'default' => $color['default'],
+				'type' => 'option',
+				'capability' => 'edit_theme_options'
+			)
+		);
+		// CONTROLS
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control(
+				$wp_customize,
+				$color['slug'],
+				array('label' => $color['label'],
+				      'section' => 'colors',
+				      'settings' => $color['slug'])
+			)
+		);
+	}
+}
+add_action( 'customize_register', 'hotel_customize_register' );
+
+//customize header image
+$defaults = array(
+	'default-image' => '/images/sydney-harbour-panorama1bl.jpg',
+	'random-default' => false,
+	'width' => 1024,
+	'height' => 300,
+	'flex-height' => true,
+	'flex-width' => true,
+	'default-text-color' => '',
+	'header-text' => true,
+	'uploads' => true,
+	'wp-head-callback' => '',
+	'admin-head-callback' => '',
+	'admin-preview-callback' => '',
+);
+add_theme_support( 'custom-header', $defaults );
