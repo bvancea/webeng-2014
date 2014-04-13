@@ -4,9 +4,6 @@
     <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" />
     <link href="<?php bloginfo('template_directory');?>/css/jquery.multitouch.css" rel="stylesheet">
 	<script src="http://code.jquery.com/jquery.js"></script>
-	<script src="<?php bloginfo('template_directory');?>/js/jquery.multitouch.js"></script>
-	<script src="<?php bloginfo('template_directory');?>/js/script.js"></script>
-	<script src="<?php bloginfo('template_directory');?>/js/navigation.js"></script>
     <script>setNavigationOrder('weekly.html', 'reviewers.html');</script>
 
 	<?php

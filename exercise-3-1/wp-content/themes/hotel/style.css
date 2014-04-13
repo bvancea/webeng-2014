@@ -396,7 +396,7 @@ h3 {
 }
 
 #panorama-div {
-    background-image: url('images/sydney-harbour-panorama1bl.jpg');
+    /*background-image: url('images/sydney-harbour-panorama1bl.jpg');*/
     background-position: 0% 0%;
     background-size: cover;
     background-repeat: no-repeat;

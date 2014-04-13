@@ -23,8 +23,10 @@ get_header();
 						</header>
 						<div>
                             <?php
-                            $small_image = get_bloginfo('template_directory') .'/images/sydney-harbour-panorama1bl-thumbnail.jpg';
-                            panorama_image($small_image);
+                            //$small_image = get_bloginfo('template_directory') .'/images/sydney-harbour-panorama1bl-thumbnail.jpg';
+//                            $panorama_options = get_option('panorama_options');
+//                            $small_image = $panorama_options['image'];
+                            panorama_image();
                             ?>
 							<?php the_content('<br><span class="more">Read more...</span>'); ?>
 							<aside class="reviewer">
