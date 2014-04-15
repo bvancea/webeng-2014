@@ -8,6 +8,15 @@ add_action( 'init', 'register_my_menu' );
  * Post thumbnails are only supported if this function is called explicitly
  */
 add_theme_support( 'post-thumbnails' );
+set_post_thumbnail_size(200,200);
+add_filter( 'post_thumbnail_html', 'remove_width_attribute', 10 );
+add_filter( 'image_send_to_editor', 'remove_width_attribute', 10 );
+
+function remove_width_attribute( $html ) {
+   $html = preg_replace( '/(width|height)="\d*"\s/', "", $html );
+   $html = preg_replace( '/(class)=".*"\s/', "", $html );
+   return $html;
+}
 /**
  * Custom reviewer type
  *
