@@ -40,6 +40,7 @@
             <h1 class="title-top">
                 <a href="#"><?php bloginfo( 'title' ); ?></a>
             </h1>
+            <h2 class="title-top"><?php bloginfo( 'description' ); ?></h2>
 	        <img src="<?php header_image(); ?>"
 	             alt=""
 		         id="header-image" />
@@ -62,7 +63,7 @@
                     'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
                     'depth'           => 0,
                     'walker'          => '',
-	                'show_home'       => 'Home - ASDF'
+	                'show_home'       => 'Home'
                 );
                 
                 wp_nav_menu( $defaults );

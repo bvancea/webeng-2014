@@ -17,7 +17,7 @@
 ?>
 
     <div class="reviewer-right">
-        <?php the_post_thumbnail() ?>
+        <?php the_post_thumbnail('full') ?>
         <span><?php the_title() ?></span>
         <div>
             <?php the_terms(get_the_ID(), 'reviewer_category') ?>

@@ -48,7 +48,7 @@ get_header();
     </section>
     <section id="col-right">
         <?php
-        get_sidebar('right');
+        get_sidebar('right-reviews');
         ?>
     </section>
 </section>
