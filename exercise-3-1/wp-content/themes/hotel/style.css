@@ -129,7 +129,7 @@ ol, ul { list-style: none; }
     }
 
     .title-top {
-        width: 30%;
+        width: 100%;
     }
 
     .reviewers-group>article {

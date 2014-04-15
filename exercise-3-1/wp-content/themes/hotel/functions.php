@@ -88,18 +88,19 @@ if (!function_exists('create_reviewer_post_type')):
         if (!current_user_can('edit_post', $post->ID) ) {
             return $post->ID;
         }
+        if ('reviewer' == get_post_type($post)) {
+            $reviewer_post_meta['reviewer_quote'] = $_POST['quote'];
+            $reviewer_post_meta['reviewer_relevance'] = $_POST['relevance'];
 
-        $reviewer_post_meta['reviewer_quote'] = $_POST['quote'];
-        $reviewer_post_meta['reviewer_relevance'] = $_POST['relevance'];
-
-        foreach ($reviewer_post_meta as $key => $value) {
-            if (get_post_meta( $post->ID, $key, FALSE)) {
-                update_post_meta($post->ID, $key, $value);
-            } else {
-                add_post_meta( $post->ID, $key, $value);
-            }
-            if (!$value) {
-                delete_post_meta( $post->ID, $key);
+            foreach ($reviewer_post_meta as $key => $value) {
+                if (get_post_meta($post->ID, $key, FALSE)) {
+                    update_post_meta($post->ID, $key, $value);
+                } else {
+                    add_post_meta($post->ID, $key, $value);
+                }
+                if (!$value) {
+                    delete_post_meta($post->ID, $key);
+                }
             }
         }
     }
@@ -161,12 +162,6 @@ function hotel_customize_register( $wp_customize ) {
 		'slug'=>'posts_color',
 		'default' => '#efefef',
 		'label' => __('Posts Background Color', 'hotel')
-	);
-
-	$colors[] = array(
-		'slug'=>'title_color',
-		'default' => '#000000',
-		'label' => __('Title Color', 'hotel')
 	);
 
 	$colors[] = array(
