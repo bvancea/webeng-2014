@@ -22,7 +22,7 @@
                     if ( has_post_thumbnail()) {
                       $large_image_url = wp_get_attachment_image_src( get_post_thumbnail_id(), 'large');
                       echo '<a href="' . $large_image_url[0] . '" title="' . the_title_attribute('echo=0') . '" >';
-                      the_post_thumbnail('full',array('class' => 'hotel-review-img'));
+                      the_post_thumbnail('full',array('class' => 'hotel-review'));
                       echo '</a>';
                     }
                 ?>
