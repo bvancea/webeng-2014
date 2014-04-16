@@ -1,11 +1,31 @@
 <header>
     <h3>Weekly Location Contest</h3>
 </header>
-<img id="contest" src="<?php bloginfo('stylesheet_directory'); ?>/images/sydney-harbour-panorama1bl-thumbnail.jpg" alt="" />
-<div>
-    This week's location is:<br>
-    <span>Sydney, Australia</span>
-</div>
-<footer>
-    <a href="#">Have a look!</a>
-</footer>
+<?php
+$loop = new WP_Query(
+    array(
+        'tag=' => 'winner',
+        'posts_per_page' => 1,
+        'orderby' => 'date',
+        'order' => 'DESC'
+    )
+);
+
+while ($loop->have_posts()):
+    $loop->the_post();
+    ?>
+    <div style="text-align: center">
+        <?php the_post_thumbnail('full') ?>
+        <span><?php echo get_split_title($post->ID); ?></span>
+    </div>
+    <div>
+        This week's location is:<br>
+        <span><?php the_title()?></span>
+    </div>
+    <footer>
+        <a href="<?php the_permalink()?>">Have a look!</a>
+    </footer>
+
+<?php
+endwhile;
+?>
