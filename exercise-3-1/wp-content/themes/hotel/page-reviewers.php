@@ -42,7 +42,7 @@ get_header();
                                 <?php echo get_post_meta(get_the_ID(), 'reviewer_quote', TRUE); ?>
                             </div>
                         </article>
-                    <?php if ($count % 2 == 0): ?>
+                    <?php if ($count % 2 == 1): ?>
                     </div>
                     <?php endif; ?>
                 <?php
