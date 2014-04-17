@@ -16,7 +16,6 @@ while ($loop->have_posts()):
     ?>
     <div style="text-align: center">
         <?php the_post_thumbnail('full') ?>
-        <span><?php echo get_split_title($post->ID); ?></span>
     </div>
     <div>
         This week's location is:<br>
