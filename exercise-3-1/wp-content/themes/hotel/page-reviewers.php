@@ -26,10 +26,13 @@ get_header();
                         'order' => 'ASC'
                     )
                 );
-
+                $count = 0;
                 while ( $loop->have_posts() ) : $loop->the_post();
+
                     ?>
+                    <?php if ($count % 2 == 0): ?>
                     <div class="reviewers-group">
+                    <?php endif; ?>
                         <article>
                             <?php the_post_thumbnail('thumbnail')?>
                             <span><?php the_title() ?></span>
@@ -39,8 +42,11 @@ get_header();
                                 <?php echo get_post_meta(get_the_ID(), 'reviewer_quote', TRUE); ?>
                             </div>
                         </article>
+                    <?php if ($count % 2 == 0): ?>
                     </div>
+                    <?php endif; ?>
                 <?php
+                    $count += 1;
                 endwhile;
                 ?>
             </div>
