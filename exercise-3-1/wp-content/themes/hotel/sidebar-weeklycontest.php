@@ -4,7 +4,7 @@
 <?php
 $loop = new WP_Query(
     array(
-        'tag=' => 'winner',
+        'tag' => 'winner',
         'posts_per_page' => 1,
         'orderby' => 'date',
         'order' => 'DESC'
