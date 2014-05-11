@@ -9,6 +9,10 @@ class MembershipsController < ApplicationController
   def destroy
     Membership.where(group_id: params[:group], user_id: params[:user]).destroy_all()
     @group=Group.find(params[:group])
-    redirect_to @group
+    if (params[:id]==params[:group])
+      redirect_to @group
+    else
+      redirect_to action: 'index', controller: 'welcome'
+    end
   end
 end

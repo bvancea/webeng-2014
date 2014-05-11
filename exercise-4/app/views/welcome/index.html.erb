@@ -4,17 +4,36 @@
   <%= link_to "Create group", new_group_path %>
   <%
      if @user
-     if @user.groups.any?
-
-
+       if @user.groups.any?
   %>
-      <h3>Your groups (<%= @user.groups.count %>):</h3>
+          <h3>Your groups (<%= @user.groups.count %>):</h3>
+          <ol>
+            <%= render @groups %>
+          </ol>
+          <%= will_paginate @groups, :param_name => 'group_page' %>
+      <%
+         end
+         end
+      %>
+</div>
+<div>
+  <%
+     if @user
+      if @user.memberships.any?
+  %>
+      <h3>Your memberships (<%= @user.memberships.count %>):</h3>
       <ol>
-        <%= render @groups %>
+        <% @mgroups.each do |mgroup| %>
+            <li>
+              <b><%= mgroup.name %></b>
+              <span style="padding-left: 25px"><%= mgroup.description %></span>
+              <span style="padding-left: 25px"><%= link_to "Delete", membership_path(:user=>@user, :group=>mgroup, :id=>@user.id), method: :delete, data: { confirm: 'Are you sure to leave group?' } %></span>
+            </li>
+        <% end %>
       </ol>
-      <%= will_paginate @groups %>
+      <%= will_paginate @memberships, :param_name => 'membership_page' %>
   <%
      end
-  end
+     end
   %>
 </div>
