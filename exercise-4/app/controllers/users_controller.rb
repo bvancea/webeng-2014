@@ -3,6 +3,10 @@ class UsersController < ApplicationController
   def new
   end
 
+  def index
+    @users=User.paginate(page: params[:page], per_page: 2)
+  end
+
   def create
     @user = User.new(user_params)
 
@@ -17,6 +21,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @groups = @user.groups.paginate(page: params[:page])
   end
 
   private

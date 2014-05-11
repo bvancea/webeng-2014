@@ -1,1 +1,20 @@
 <h1>Welcome, <%= session[:logged_user_name] %>!</h1>
+
+<div>
+  <%= link_to "Create group", new_group_path %>
+  <%
+     if @user
+     if @user.groups.any?
+
+
+  %>
+      <h3>Your groups (<%= @user.groups.count %>):</h3>
+      <ol>
+        <%= render @groups %>
+      </ol>
+      <%= will_paginate @groups %>
+  <%
+     end
+  end
+  %>
+</div>

@@ -10,3 +10,13 @@
   <%= @user.username %>
 </p>
 
+<% provide(:title, @user.name) %>
+<div>
+  <% if @user.groups.any? %>
+      <h3>Groups (<%= @user.groups.count %>):</h3>
+      <ol>
+        <%= render @groups %>
+      </ol>
+      <%= will_paginate @groups %>
+  <% end %>
+</div>

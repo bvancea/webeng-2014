@@ -1,0 +1,23 @@
+<% provide(:title, 'Create new group') %>
+<h1>Create new group</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@group) do |f| %>
+
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+        <br>
+        <%= f.label :description %>
+        <%= f.text_field :description %>
+        <br><br>
+        Members:
+        <% for user in User.where('id != ?',session[:logged_user_id]) %>
+            <br><%= check_box_tag "user_ids[]", user.id %>
+            <%= user.name %>
+        <% end %>
+        <br>
+        <%= f.submit "Create group", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

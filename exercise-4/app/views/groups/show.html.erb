@@ -1,0 +1,32 @@
+<h1>Group details:</h1>
+
+<p>
+  <strong>Name:</strong>
+  <%= @group.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @group.description %>
+</p>
+
+<p>
+  <strong>Owner:</strong>
+  <%= render @owner %>
+</p>
+
+
+<div>
+  <% if @group.memberships.any? %>
+      <h3>Members (<%= @group.memberships.count %>):</h3>
+      <ol>
+        <% @users.each do |user| %>
+        <li>
+          <b><%= user.name %></b>
+          <span style="padding-left: 25px"><%= user.username %></span>
+          <span style="padding-left: 25px"><%= link_to "Delete", membership_path(:user=>user, :group=>@group), method: :delete, data: { confirm: 'Are you sure to leave group?' } %></span>
+        </li>
+        <% end %>
+      </ol>
+  <% end %>
+</div>
