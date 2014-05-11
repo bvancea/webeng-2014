@@ -26,7 +26,7 @@
         <li>
           <b><%= user.name %></b>
           <span style="padding-left: 25px"><%= user.username %></span>
-          <span style="padding-left: 25px"><%= link_to "Delete", membership_path(:user=>user, :group=>@group), method: :delete, data: { confirm: 'Are you sure to leave group?' } %></span>
+          <span style="padding-left: 25px"><%= link_to "Ban this member", membership_path(:user=>user, :group=>@group), method: :delete, data: { confirm: 'Are you sure to leave group?' } %></span>
         </li>
         <% end %>
       </ol>
