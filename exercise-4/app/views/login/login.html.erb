@@ -1,27 +1,35 @@
-<h1>Login</h1>
+<div class="container">
+  <fieldset>
+    <legend class="col-md-4 col-lg-offset-4">
+  <h1>Login</h1>
 
-<%= form_for :login, url: login_login_path do |f| %>
+  <%= form_for :login, url: login_login_path do |f| %>
 
-    <p>
-      <% if (params[:alert] != nil) %>
-      <%= params[:alert] %>
-      <% end %>
-    </p>
+      <div class="form-group">
+        <% if (params[:alert] != nil) %>
+            <%= params[:alert] %>
+        <% end %>
+      </div>
 
-    <p>
-      <%= f.label :username %><br>
-      <%= f.text_field :username %>
-    </p>
+      <div class="form-group">
+        <%= f.label :username %>
+        <br>
+        <%= f.text_field :username %>
+      </div>
 
-    <p>
-      <%= f.label :password %><br>
-      <%= f.password_field :password %>
-    </p>
+      <div class="form-group">
+        <%= f.label :password %>
+        <br>
+        <%= f.password_field :password %>
+      </div>
 
-    <p>
-      <%= f.submit "Login" %>
-    </p>
+      <div class="form-group">
+        <%= f.submit "Login", :class => "btn btn-primary" %>
+      </div>
 
-<% end %>
+      <%= link_to "Register", controller: 'users', action: 'new' %>
+  <% end %>
+    </legend>
+  </fieldset>
 
-<%= link_to "Register", controller: 'users', action: 'new' %>
+</div>

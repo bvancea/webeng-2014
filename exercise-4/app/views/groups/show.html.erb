@@ -1,34 +1,43 @@
-<%= link_to "Home", welcome_index_path %>
+<div class="container">
+  <fieldset>
+    <legend class="col-md-12">
 
-<h1>Group details:</h1>
+      <%= link_to "Home", welcome_index_path %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @group.name %>
-</p>
+      <h1>Group details:</h1>
 
-<p>
-  <strong>Description:</strong>
-  <%= @group.description %>
-</p>
+      <p>
+        <strong>Name:</strong>
+        <%= @group.name %>
+      </p>
 
-<p>
-  <strong>Owner:</strong>
-  <%= render @owner %>
-</p>
+      <p>
+        <strong>Description:</strong>
+        <%= @group.description %>
+      </p>
+
+      <p>
+        <strong>Owner:</strong>
+        <%= render @owner %>
+      </p>
 
 
-<div>
-  <% if @group.memberships.any? %>
-      <h3>Members (<%= @group.memberships.count %>):</h3>
-      <ol>
-        <% @users.each do |user| %>
-        <li>
-          <b><%= user.name %></b>
-          <span style="padding-left: 25px"><%= user.username %></span>
-          <span style="padding-left: 25px"><%= link_to "Ban this member", membership_path(:user=>user, :group=>@group), method: :delete, data: { confirm: 'Are you sure to leave group?' } %></span>
-        </li>
+      <div>
+        <% if @group.memberships.any? %>
+            <h3>Members (<%= @group.memberships.count %>):</h3>
+            <ol>
+              <% @users.each do |user| %>
+                  <li>
+                    <b><%= user.name %></b>
+                    <span style="padding-left: 25px"><%= user.username %></span>
+                    <span style="padding-left: 25px"><%= link_to "Ban this member", membership_path(:user => user, :group => @group), method: :delete, data: {confirm: 'Are you sure to leave group?'} %></span>
+                  </li>
+              <% end %>
+            </ol>
         <% end %>
-      </ol>
-  <% end %>
+      </div>
+
+    </legend>
+  </fieldset>
+
 </div>
