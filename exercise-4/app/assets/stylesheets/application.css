@@ -14,3 +14,21 @@
  *= require_self
  *= require bootstrap.min
  */
+
+body {
+    background-color: #70B2FF;
+}
+
+.container {
+    width: 80%;
+    height: auto;
+    margin: auto;
+    background-color: white;
+    margin-top: 2em;
+}
+
+.content {
+    width:90%;
+    margin:auto;
+    margin-top: 2em;
+}

@@ -1,43 +1,36 @@
-<div class="container">
-  <fieldset>
-    <legend class="col-md-12">
 
-      <%= link_to "Home", welcome_index_path %>
+<div class="page-header">
+  <h1>Activities for <%= @current_group.name %>:</h1>
+</div>
 
-      <h1>Activities for <%= @current_group.name %>:</h1>
 
-      <% if @current_group.activities.any? %>
+<% if @current_group.activities.any? %>
 
-        <table class="table table-bordered table-hover table-condensed">
-          <tr class="success">
-            <th>Name</th>
-            <th>Location</th>
-            <th>Sart date</th>
-            <th>Duration</th>
-            <th>Description</th>
+    <table class="table table-bordered table-hover table-condensed">
+      <tr class="success">
+        <th>Name</th>
+        <th>Location</th>
+        <th>Sart date</th>
+        <th>Duration</th>
+        <th>Description</th>
+      </tr>
+      <% @current_group.activities.each do |activity| %>
+
+          <tr>
+            <td><%= activity.name %></td>
+            <td><%= activity.location %></td>
+            <td><%= activity.start_date %></td>
+            <td><%= activity.duration %></td>
+            <td><%= activity.description %></td>
           </tr>
-          <% @current_group.activities.each do |activity| %>
-
-            <tr>
-              <td><%= activity.name %></td>
-              <td><%= activity.location %></td>
-              <td><%= activity.start_date %></td>
-              <td><%= activity.duration %></td>
-              <td><%= activity.description %></td>
-            </tr>
-
-          <% end %>
-        </table>
-
-      <% else %>
-
-      <p>
-        No activities for this group.
-      </p>
 
       <% end %>
+    </table>
 
-    </legend>
-  </fieldset>
+<% else %>
 
-</div>
+    <p>
+      No activities for this group.
+    </p>
+
+<% end %>

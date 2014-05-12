@@ -15,4 +15,10 @@ class LoginController < ApplicationController
       redirect_to action: 'login', :alert => "Wrong username or password!"
     end
   end
+
+  def logout
+    reset_session
+
+    redirect_to action: 'login'
+  end
 end
