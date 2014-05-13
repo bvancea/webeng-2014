@@ -7,14 +7,16 @@
 <% if @current_group.activities.any? %>
 
     <table class="table table-bordered table-hover table-condensed">
-      <tr class="success">
+      <tr class="active">
         <th>Name</th>
         <th>Location</th>
         <th>Sart date</th>
         <th>Duration</th>
         <th>Description</th>
+        <th>Votes</th>
+        <th></th>
       </tr>
-      <% @current_group.activities.each do |activity| %>
+      <% @current_group.activities.sort_by { |x| -x.votes }.each do |activity| %>
 
           <tr>
             <td><%= activity.name %></td>
@@ -22,6 +24,8 @@
             <td><%= activity.start_date %></td>
             <td><%= activity.duration %></td>
             <td><%= activity.description %></td>
+            <td><%= activity.votes %></td>
+            <td><%= button_to "Vote", {controller: 'activities', action: 'vote', :activity => activity.id}, {:class => "btn btn-primary"} %></td>
           </tr>
 
       <% end %>

@@ -32,3 +32,14 @@ body {
     margin:auto;
     margin-top: 2em;
 }
+
+.list-group-item {
+    border-radius: 0 !important;
+    border-left:0;
+    border-right: 0;
+}
+
+.panel {
+    border:0;
+    border-color: #ffffff;
+}

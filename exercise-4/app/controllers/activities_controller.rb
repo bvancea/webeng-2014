@@ -22,6 +22,15 @@ class ActivitiesController < ApplicationController
     session[:current_group] = @current_group.id
   end
 
+  def vote
+    @activity = Activity.find(params[:activity])
+    @activity.votes = @activity.votes + 1
+
+    @activity.update_column('votes', @activity.votes)
+
+    redirect_to action: 'show_all', :group => @activity.group_id
+  end
+
   private
   def activity_params
     params[:activity][:group_id] = session[:current_group]
