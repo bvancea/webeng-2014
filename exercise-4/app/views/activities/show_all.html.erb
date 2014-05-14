@@ -25,7 +25,11 @@
             <td><%= activity.duration %></td>
             <td><%= activity.description %></td>
             <td><%= activity.votes %></td>
+            <% if !(activity.users.include?(User.find(session[:logged_user_id]))) %>
             <td><%= button_to "Vote", {controller: 'activities', action: 'vote', :activity => activity.id}, {:class => "btn btn-primary"} %></td>
+            <% else %>
+            <td><%= button_to "UnVote", {controller: 'activities', action: 'unvote', :activity => activity.id}, {:class => "btn btn-primary"} %></td>
+            <% end %>
           </tr>
 
       <% end %>

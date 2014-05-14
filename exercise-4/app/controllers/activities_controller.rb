@@ -23,12 +23,31 @@ class ActivitiesController < ApplicationController
   end
 
   def vote
+    @current_user = User.find(session[:logged_user_id])
     @activity = Activity.find(params[:activity])
-    @activity.votes = @activity.votes + 1
 
-    @activity.update_column('votes', @activity.votes)
+    if !(@activity.users.include?(User.find(@current_user)))
+      @activity.users << User.find(@current_user)
+      @activity.votes = @activity.votes + 1
+      @activity.update_column('votes', @activity.votes)
+      redirect_to action: 'show_all', :group => @activity.group_id
+    else
+      redirect_to action: 'show_all', :group => @activity.group_id
+    end
+  end
 
-    redirect_to action: 'show_all', :group => @activity.group_id
+  def unvote
+    @current_user = User.find(session[:logged_user_id])
+    @activity = Activity.find(params[:activity])
+
+    if (@activity.users.include?(User.find(@current_user)))
+      @activity.users.delete(User.find(@current_user))
+      @activity.votes = @activity.votes - 1
+      @activity.update_column('votes', @activity.votes)
+      redirect_to action: 'show_all', :group => @activity.group_id
+    else
+      redirect_to action: 'show_all', :group => @activity.group_id
+    end
   end
 
   private
