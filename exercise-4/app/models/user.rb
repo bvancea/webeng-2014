@@ -6,7 +6,9 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :activities
 
-  validates :username, presence: true
-  validates :password, presence: true
+  validates :username, presence: true, uniqueness: true, length: { maximum: 20 }
+  validates :password, presence: true, length: { minimum: 5 }
   validates :name, presence: true
+
+
 end

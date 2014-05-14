@@ -1,8 +1,11 @@
 class GroupsController < ApplicationController
 
+  before_action :group_member_user, only: [:show]
+  before_action :group_owner_user, only: [:edit, :update, :destroy]
+  before_action :logged_user
+
   def show
     @group=Group.find(params[:id])
-    @user_ids=[2, 3]
     @user_ids=Membership.where(group_id: @group.id).pluck(:user_id)
     @users=User.find(@user_ids)
     @owner=User.find(@group.owner_id)
@@ -20,8 +23,10 @@ class GroupsController < ApplicationController
       @user_ids.each do |user_id|
         Membership.create(user_id: user_id, group_id: @group.id)
       end
+      flash[:success] = "Group successfully created!"
       redirect_to action: 'index', controller: 'welcome'
     else
+      flash[:error] = "Invalid data provided - group creation failed!"
       render 'new'
     end
   end
@@ -57,5 +62,7 @@ class GroupsController < ApplicationController
   def group_params
     params.require(:group).permit(:name, :description)
   end
+
+
 
 end
