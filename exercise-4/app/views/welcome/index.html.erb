@@ -42,7 +42,7 @@
                   <div class="btn-group btn-group-sm">
                     <button class="btn btn-default">
                       <%= link_to "Leave group", membership_path(:user => @user, :group => mgroup, :id => @user.id),
-                                method: :delete, data: {confirm: 'Are you sure to leave group?'} %></button>
+                                method: :delete, data: {confirm: 'Are you sure to remove this membership?'} %></button>
                     <button class="btn btn-default">
                       <%= link_to "View activities", controller: 'activities', action: 'show_all', :group => mgroup %>
                     </button>

@@ -26,14 +26,14 @@ class GroupsController < ApplicationController
       flash[:success] = "Group successfully created!"
       redirect_to action: 'index', controller: 'welcome'
     else
-      flash[:error] = "Invalid data provided - group creation failed!"
+      flash[:error] = "Invalid input provided - group creation failed!"
       render 'new'
     end
   end
 
   def destroy
     Group.find(params[:id]).destroy
-    flash[:success] = "Group deleted."
+    flash[:success] = "Group successfully deleted!"
     redirect_to action: 'index', controller: 'welcome'
   end
 
@@ -51,8 +51,10 @@ class GroupsController < ApplicationController
       @user_ids.each do |user_id|
         Membership.create(user_id: user_id, group_id: @group.id)
       end
+      flash[:success] = "Group successfully updated!"
       redirect_to action: 'index', controller: 'welcome'
     else
+      flash[:error] = "Invalid input provided - group edition failed!"
       render 'edit'
     end
   end

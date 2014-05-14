@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_action :logged_user, only: [:index]
+
   def new
   end
 
@@ -12,9 +14,9 @@ class UsersController < ApplicationController
     @user.password=BCrypt::Password.create(@user.password)
 
     if (@user.save)
-      puts "*************Successfully saved." + @user.username
+      flash[:success] = "User: " + @user.username+ " successfully saved."
     else
-      puts "*************Not saved! :("
+      flash[:error] = "User: " + @user.username+ " cannot be saved."
     end
 
     redirect_to @user

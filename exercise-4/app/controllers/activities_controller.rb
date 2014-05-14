@@ -1,5 +1,10 @@
 class ActivitiesController < ApplicationController
 
+  before_action :group_member_user, only: [:show_all]
+  before_action :group_owner_user, only: [:create, :new]
+  before_action :logged_user
+  before_action :activity_user, only: [:vote, :unvote]
+
   def new
 
     @current_group = Group.find(params[:group])
@@ -11,7 +16,9 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(activity_params)
 
     if (@activity.save)
-      puts "*************Successfully saved activity." + @activity.name
+      flash[:success] = "Activity: " + activity.username+ " successfully created."
+    else
+      flash[:success] = "Activity: " + activity.username+ " cannot be created."
     end
 
     redirect_to action: 'index', controller: 'welcome'
@@ -57,5 +64,12 @@ class ActivitiesController < ApplicationController
     params[:activity][:votes] = 0
     params.require(:activity).permit(:name, :description, :location, :duration,
                                      :start_date, :image_url, :definitive, :votes, :group_id)
+  end
+
+  def activity_user
+    if (Activity.find(params[:activity]).group.users.include?(User.find(session[:logged_user_id])))
+      flash[:error]="User not allowed to perform this action (not a member of the group). Please sign in!"
+      redirect_to controller: 'login', action: 'login'
+    end
   end
 end
