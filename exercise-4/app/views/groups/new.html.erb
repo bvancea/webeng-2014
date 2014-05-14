@@ -4,10 +4,10 @@
 </div>
 
 
-<div>
+<div class="row">
   <div class="span6 offset3">
     <%= form_for(@group) do |f| %>
-
+        <%= render 'shared/error_messages', object: f.object %>
         <div class="form-group">
           <%= f.label :name %>
           <br>
