@@ -17,44 +17,44 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_params)
-    @user_ids=params[:user_ids]
-    @group.owner_id=session[:logged_user_id]
+    @user_ids = params[:user_ids]
+    @group.owner_id = session[:logged_user_id]
     if @group.save
       @user_ids.each do |user_id|
         Membership.create(user_id: user_id, group_id: @group.id)
       end
-      flash[:success] = "Group successfully created!"
+      flash[:success] = 'Group successfully created!'
       redirect_to action: 'index', controller: 'welcome'
     else
-      flash[:error] = "Invalid input provided - group creation failed!"
+      flash[:error] = 'Invalid input provided - group creation failed!'
       render 'new'
     end
   end
 
   def destroy
     Group.find(params[:id]).destroy
-    flash[:success] = "Group successfully deleted!"
+    flash[:success] = 'Group successfully deleted!'
     redirect_to action: 'index', controller: 'welcome'
   end
 
   def edit
     @group = Group.find(params[:id])
-    @user_ids=Membership.where(group_id: @group.id).pluck(:user_id)
-    @users=User.find(@user_ids)
+    @user_ids = Membership.where(group_id: @group.id).pluck(:user_id)
+    @users = User.find(@user_ids)
   end
 
   def update
     @group = Group.find(params[:id])
     if @group.update_attributes(group_params)
       Membership.where(group_id: @group.id).destroy_all
-      @user_ids=params[:user_ids]
+      @user_ids = params[:user_ids]
       @user_ids.each do |user_id|
         Membership.create(user_id: user_id, group_id: @group.id)
       end
-      flash[:success] = "Group successfully updated!"
+      flash[:success] = 'Group successfully updated!'
       redirect_to action: 'index', controller: 'welcome'
     else
-      flash[:error] = "Invalid input provided - group edition failed!"
+      flash[:error] = 'Invalid input provided - group edition failed!'
       render 'edit'
     end
   end
@@ -64,7 +64,5 @@ class GroupsController < ApplicationController
   def group_params
     params.require(:group).permit(:name, :description)
   end
-
-
 
 end

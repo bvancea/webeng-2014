@@ -1,5 +1,5 @@
 <div class="page-header">
-  <% provide(:title, "Edit group") %>
+  <% provide(:title, 'Edit group') %>
   <h1>Update your group</h1>
 </div>
 
@@ -27,14 +27,14 @@
         </div>
 
         <div class="form-group">
-          <%= f.label "Members:" %>
+          <%= f.label 'Members:' %>
           <% for user in User.where('id != ?', session[:logged_user_id]) %>
-              <br><%= check_box_tag "user_ids[]", user.id, (@user_ids.include?(user.id)) %>
+              <br><%= check_box_tag 'user_ids[]', user.id, (@user_ids.include?(user.id)) %>
               <%= user.name %>
           <% end %>
         </div>
 
-        <%= f.submit "Save changes", class: "btn btn-primary" %>
+        <%= f.submit 'Save changes', class: 'btn btn-primary' %>
     <% end %>
   </div>
 </div>

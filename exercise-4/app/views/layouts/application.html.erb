@@ -10,8 +10,8 @@
 
 <div class="container">
   <% if (session[:logged_user_name]) %>
-      <%= link_to "Home", welcome_index_path %>
-      <%= link_to "Logout", controller: 'login', action: 'logout' %>
+      <%= link_to 'Home', welcome_index_path %>
+      <%= link_to 'Logout', controller: 'login', action: 'logout' %>
   <% end %>
 
   <div class="content">

@@ -15,10 +15,10 @@ class ActivitiesController < ApplicationController
   def create
     @activity = Activity.new(activity_params)
 
-    if (@activity.save)
-      flash[:success] = "Activity: " + activity.username+ " successfully created."
+    if @activity.save
+      flash[:success] = 'Activity: ' + @activity.username + ' successfully created.'
     else
-      flash[:success] = "Activity: " + activity.username+ " cannot be created."
+      flash[:success] = 'Activity: ' + @activity.username + ' cannot be created.'
     end
 
     redirect_to action: 'index', controller: 'welcome'
@@ -33,7 +33,7 @@ class ActivitiesController < ApplicationController
     @current_user = User.find(session[:logged_user_id])
     @activity = Activity.find(params[:activity])
 
-    if !(@activity.users.include?(User.find(@current_user)))
+    unless @activity.users.include?(User.find(@current_user))
       @activity.users << User.find(@current_user)
       @activity.votes = @activity.votes + 1
       @activity.update_column('votes', @activity.votes)
@@ -47,7 +47,7 @@ class ActivitiesController < ApplicationController
     @current_user = User.find(session[:logged_user_id])
     @activity = Activity.find(params[:activity])
 
-    if (@activity.users.include?(User.find(@current_user)))
+    if @activity.users.include?(User.find(@current_user))
       @activity.users.delete(User.find(@current_user))
       @activity.votes = @activity.votes - 1
       @activity.update_column('votes', @activity.votes)
@@ -67,8 +67,8 @@ class ActivitiesController < ApplicationController
   end
 
   def activity_user
-    if (Activity.find(params[:activity]).group.users.include?(User.find(session[:logged_user_id])))
-      flash[:error]="User not allowed to perform this action (not a member of the group). Please sign in!"
+    if Activity.find(params[:activity]).group.users.include?(User.find(session[:logged_user_id]))
+      flash[:error] = 'User not allowed to perform this action (not a member of the group). Please sign in!'
       redirect_to controller: 'login', action: 'login'
     end
   end

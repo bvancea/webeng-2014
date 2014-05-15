@@ -6,17 +6,17 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users=User.paginate(page: params[:page], per_page: 2)
+    @users = User.paginate(page: params[:page], per_page: 2)
   end
 
   def create
     @user = User.new(user_params)
-    @user.password=BCrypt::Password.create(@user.password)
+    @user.password = BCrypt::Password.create(@user.password)
 
-    if (@user.save)
-      flash[:success] = "User: " + @user.username+ " successfully saved."
+    if @user.save
+      flash[:success] = 'User: ' + @user.username + ' successfully saved.'
     else
-      flash[:error] = "User: " + @user.username+ " cannot be saved."
+      flash[:error] = 'User: ' + @user.username + ' cannot be saved.'
     end
 
     redirect_to @user
