@@ -1,4 +1,5 @@
 class ActivitiesController < ApplicationController
+  include TwitterHelper
 
   before_action :group_member_user, only: [:show_all]
   before_action :group_owner_user, only: [:create, :new]
@@ -6,10 +7,8 @@ class ActivitiesController < ApplicationController
   before_action :activity_user, only: [:vote, :unvote]
 
   def new
-
     @current_group = Group.find(params[:group])
     session[:current_group] = @current_group.id
-
   end
 
   def create
@@ -22,6 +21,25 @@ class ActivitiesController < ApplicationController
     end
 
     redirect_to action: 'index', controller: 'welcome'
+  end
+
+
+  def edit
+    @activity = Activity.find(params[:id])
+    @current_group = Group.find(@activity.group_id)
+    session[:current_group] = @current_group.id
+  end
+
+  def update
+    @activity = Activity.update(params[:id], activity_params)
+
+    if @activity
+      flash[:success] = 'Activity successfully updated!'
+      redirect_to action: 'index', controller: 'welcome'
+    else
+      flash[:error] = 'Invalid input provided - group edition failed!'
+      render 'edit'
+    end
   end
 
   def show_all
@@ -63,6 +81,7 @@ class ActivitiesController < ApplicationController
     if @activity.group.owner_id == @current_user.id and !@activity.definitive
       @activity.definitive = true
       @activity.save
+      TwitterHelper::post_tweet build_tweet
     end
 
     redirect_to action: 'show_all', :group => @activity.group_id
@@ -71,8 +90,8 @@ class ActivitiesController < ApplicationController
   private
   def activity_params
     params[:activity][:group_id] = session[:current_group]
-    params[:activity][:definitive] = false
-    params[:activity][:votes] = 0
+    params[:activity][:definitive] ||= false
+    params[:activity][:votes] ||= 0
     params.require(:activity).permit(:name, :description, :location, :duration,
                                      :start_date, :image_url, :definitive, :votes, :group_id)
 
@@ -83,5 +102,12 @@ class ActivitiesController < ApplicationController
       flash[:error] = 'User not allowed to perform this action (not a member of the group). Please sign in!'
       redirect_to controller: 'login', action: 'login'
     end
+  end
+
+  def build_tweet
+    activity_name = @activity.name
+    group_name = @activity.group.name
+    tweet = "Activity #{activity_name} for group #{group_name} was just made definitive!"
+    return tweet
   end
 end

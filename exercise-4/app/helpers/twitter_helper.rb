@@ -11,7 +11,7 @@ module TwitterHelper
     CONSUMER_SECRET = 'boYAWmA6NmDP6FdDSaPR7dGt6HRK8IVNpFBhnwuMVxOwyYMQ5A'
     ACCESS_TOKEN = '2492850913-JRFJ1rSMrQiyiPk3N8XUfOQ57W0vKAj0oKjk4dj'
     ACCESS_SECRET = 'VFF8sod9a1ukKXCIK9EeOVB2gtbMRMDhzJ1iMlXNIcFbQ'
-    HASH_TAG = ' #webeng-eth-4'
+    HASH_TAG = ' #webengeth4'
 
   public
     def self.post_tweet(text)

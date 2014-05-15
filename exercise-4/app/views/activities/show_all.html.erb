@@ -13,8 +13,9 @@
         <th>Sart date</th>
         <th>Duration</th>
         <th>Description</th>
+        <th>Status</th>
         <th>Votes</th>
-        <th></th>
+        <th>Admin</th>
       </tr>
       <% @current_group.activities.sort_by { |x| -x.votes }.each do |activity| %>
 
@@ -24,12 +25,26 @@
             <td><%= activity.start_date %></td>
             <td><%= activity.duration %></td>
             <td><%= activity.description %></td>
+            <td><%= activity.definitive %></td>
             <td><%= activity.votes %></td>
+            <td>
             <% if !(activity.users.include?(User.find(session[:logged_user_id]))) %>
-            <td><%= button_to 'Vote', {controller: 'activities', action: 'vote', :activity => activity.id}, {:class => "btn btn-primary"} %></td>
+            <%= button_to 'Vote',
+                          { controller: 'activities', action: 'vote', :activity => activity.id},
+                          {:class => 'btn btn-primary'} %>
             <% else %>
-            <td><%= button_to 'UnVote', {controller: 'activities', action: 'unvote', :activity => activity.id}, {:class => "btn btn-primary"} %></td>
+            <%= button_to 'UnVote',
+                          {controller: 'activities', action: 'unvote', :activity => activity.id},
+                          {:class => 'btn btn-primary'} %>
             <% end %>
+            <% if !activity.definitive and activity.group.owner_id.equal?(session[:logged_user_id]) %>
+            <%= button_to 'Make definitive',
+                          { controller: 'activities', action: 'make_definitive', :activity => activity.id},
+                          {:class => 'btn btn-primary'} %>
+
+            <% end %>
+            <button class="btn btn-default"><%= link_to 'Edit', edit_activity_path(activity) %></button>
+            </td>
           </tr>
 
       <% end %>
