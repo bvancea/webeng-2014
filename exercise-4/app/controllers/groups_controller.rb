@@ -5,10 +5,10 @@ class GroupsController < ApplicationController
   before_action :logged_user
 
   def show
-    @group=Group.find(params[:id])
-    @user_ids=Membership.where(group_id: @group.id).pluck(:user_id)
-    @users=User.find(@user_ids)
-    @owner=User.find(@group.owner_id)
+    @group = Group.find(params[:id])
+    @user_ids = Membership.where(group_id: @group.id).pluck(:user_id)
+    @users = User.find(@user_ids)
+    @owner = User.find(@group.owner_id)
   end
 
   def new

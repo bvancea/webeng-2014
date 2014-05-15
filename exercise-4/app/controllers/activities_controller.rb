@@ -33,28 +33,39 @@ class ActivitiesController < ApplicationController
     @current_user = User.find(session[:logged_user_id])
     @activity = Activity.find(params[:activity])
 
-    unless @activity.users.include?(User.find(@current_user))
-      @activity.users << User.find(@current_user)
+    unless @activity.users.include?(@current_user)
+      @activity.users << @current_user
       @activity.votes = @activity.votes + 1
-      @activity.update_column('votes', @activity.votes)
-      redirect_to action: 'show_all', :group => @activity.group_id
-    else
-      redirect_to action: 'show_all', :group => @activity.group_id
+      @activity.save
     end
+
+    redirect_to action: 'show_all', :group => @activity.group_id
   end
 
   def unvote
     @current_user = User.find(session[:logged_user_id])
     @activity = Activity.find(params[:activity])
 
-    if @activity.users.include?(User.find(@current_user))
-      @activity.users.delete(User.find(@current_user))
+    if @activity.users.include?(@current_user)
+      @activity.users.delete(@current_user)
       @activity.votes = @activity.votes - 1
-      @activity.update_column('votes', @activity.votes)
-      redirect_to action: 'show_all', :group => @activity.group_id
-    else
-      redirect_to action: 'show_all', :group => @activity.group_id
+      #ToDo check for success?
+      @activity.save
+      #@activity.update_column('votes', @activity.votes)
     end
+    redirect_to action: 'show_all', :group => @activity.group_id
+  end
+
+  def make_definitive
+    @current_user = User.find(session[:logged_user_id])
+    @activity = Activity.find(params[:activity])
+
+    if @activity.group.owner_id == @current_user.id and !@activity.definitive
+      @activity.definitive = true
+      @activity.save
+    end
+
+    redirect_to action: 'show_all', :group => @activity.group_id
   end
 
   private
@@ -64,10 +75,11 @@ class ActivitiesController < ApplicationController
     params[:activity][:votes] = 0
     params.require(:activity).permit(:name, :description, :location, :duration,
                                      :start_date, :image_url, :definitive, :votes, :group_id)
+
   end
 
   def activity_user
-    if Activity.find(params[:activity]).group.users.include?(User.find(session[:logged_user_id]))
+    if Activity.find(params[:activity]).group.memberships.include?(User.find(session[:logged_user_id]))
       flash[:error] = 'User not allowed to perform this action (not a member of the group). Please sign in!'
       redirect_to controller: 'login', action: 'login'
     end
