@@ -16,9 +16,9 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(activity_params)
 
     if @activity.save
-      flash[:success] = 'Activity: ' + @activity.username + ' successfully created.'
+      flash[:success] = 'Activity: ' + @activity.name + ' successfully created.'
     else
-      flash[:success] = 'Activity: ' + @activity.username + ' cannot be created.'
+      flash[:success] = 'Activity: ' + @activity.name + ' cannot be created.'
     end
 
     redirect_to action: 'index', controller: 'welcome'
