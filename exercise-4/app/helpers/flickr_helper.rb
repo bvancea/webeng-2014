@@ -23,12 +23,26 @@ module FlickrHelper
                  api_key: API_KEY,
                  format: 'json',
                  nojsoncallback: 1,
-                 text: text }
+                 per_page: 10,
+                 tags: text }
       request_url = FLICKR_API_URL + params.to_query
       images = open(request_url)
       response = images.read
       image_content = JSON.parse(response)
-      return image_content
+      construct_picture_urls(image_content)
     end
+
+  def self.construct_picture_urls(photos_response)
+    photo_array = photos_response['photos']['photo']
+    photo_array.map { |photo| single_picture_url(photo) }
+  end
+
+  def self.single_picture_url(photo)
+    farm_id = photo['farm']
+    server_id = photo['server']
+    id = photo['id']
+    secret = photo['secret']
+    return "http://farm#{farm_id}.staticflickr.com/#{server_id}/#{id}_#{secret}_q.jpg"
+  end
 
 end

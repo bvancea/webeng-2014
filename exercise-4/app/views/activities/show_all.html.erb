@@ -29,19 +29,12 @@
             <td><%= activity.votes %></td>
             <td>
             <% if !(activity.users.include?(User.find(session[:logged_user_id]))) %>
-            <%= button_to 'Vote',
-                          { controller: 'activities', action: 'vote', :activity => activity.id},
-                          {:class => 'btn btn-primary'} %>
+            <%= button_to 'Vote', vote_activity_path(activity), {:class => 'btn btn-primary'} %>
             <% else %>
-            <%= button_to 'UnVote',
-                          {controller: 'activities', action: 'unvote', :activity => activity.id},
-                          {:class => 'btn btn-primary'} %>
+            <%= button_to 'UnVote', unvote_activity_path(activity), {:class => 'btn btn-primary'} %>
             <% end %>
             <% if !activity.definitive and activity.group.owner_id.equal?(session[:logged_user_id]) %>
-            <%= button_to 'Make definitive',
-                          { controller: 'activities', action: 'make_definitive', :activity => activity.id},
-                          {:class => 'btn btn-primary'} %>
-
+            <%= button_to 'Make definitive', activity_make_definitive_path(activity), {:class => 'btn btn-primary'} %>
             <% end %>
             <button class="btn btn-default"><%= link_to 'Edit', edit_activity_path(activity) %></button>
             </td>
@@ -49,6 +42,7 @@
 
       <% end %>
     </table>
+
 
 <% else %>
 

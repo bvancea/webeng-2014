@@ -1,5 +1,6 @@
 class ActivitiesController < ApplicationController
   include TwitterHelper
+  include FlickrHelper
 
   before_action :group_member_user, only: [:show_all]
   before_action :group_owner_user, only: [:create, :new]
@@ -22,7 +23,6 @@ class ActivitiesController < ApplicationController
 
     redirect_to action: 'index', controller: 'welcome'
   end
-
 
   def edit
     @activity = Activity.find(params[:id])
@@ -85,6 +85,14 @@ class ActivitiesController < ApplicationController
     end
 
     redirect_to action: 'show_all', :group => @activity.group_id
+  end
+
+  def search_images_on_flickr
+    text = params[:search]
+    images = FlickrHelper::search_images(text)
+    respond_to do |format|
+      format.json  { render :json => images }
+    end
   end
 
   private
