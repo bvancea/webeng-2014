@@ -23,7 +23,7 @@ module FlickrHelper
                  api_key: API_KEY,
                  format: 'json',
                  nojsoncallback: 1,
-                 per_page: 10,
+                 per_page: 12,
                  tags: text }
       request_url = FLICKR_API_URL + params.to_query
       images = open(request_url)
