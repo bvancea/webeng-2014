@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
       redirect_to controller: 'welcome', action: 'index'
     else
       unless session[:logged_user_id] == Group.find(gr_id).owner_id
-        flash[:error] = '2User not allowed to perform this action. Please sign in!'
+        flash[:error] = 'User not allowed to perform this action. Please sign in!'
         redirect_to controller: 'login', action: 'login'
       end
     end

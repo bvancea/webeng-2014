@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       @user.password = BCrypt::Password.create(@user.password)
       if @user.save
         flash[:success] = 'User: ' + @user.username + ' successfully saved.'
-        redirect_to @user
+        redirect_to controller: 'login', action: 'login'
       else
         flash[:error] = 'User: ' + @user.username + ' cannot be saved.'
         render 'new'
