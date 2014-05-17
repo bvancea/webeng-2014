@@ -3,7 +3,7 @@ class ActivitiesController < ApplicationController
   include FlickrHelper
 
   before_action :group_member_user, only: [:show_all]
-  before_action :group_owner_user, only: [:create, :new]
+  before_action :group_owner_user, only: [:create, :new, :make_definitive]
   before_action :logged_user
   before_action :activity_user, only: [:vote, :unvote]
 

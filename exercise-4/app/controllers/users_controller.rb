@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  #before_action :logged_user, only: [:index]
+  before_action :logged_user, only: [:index]
 
   def new
     @user = User.new
