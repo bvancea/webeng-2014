@@ -19,6 +19,7 @@
 
 body {
     background-color: #70B2FF;
+    padding-top: 60px;
 }
 
 .container {
@@ -44,6 +45,18 @@ body {
 .panel {
     border:0;
     border-color: #ffffff;
+}
+
+.form-control {
+    width: 20%;
+}
+
+.field_with_errors {
+    @extend .has-error;
+}
+
+html {
+    overflow-y: scroll;
 }
 
 
