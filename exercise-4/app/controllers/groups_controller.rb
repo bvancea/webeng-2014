@@ -56,6 +56,7 @@ class GroupsController < ApplicationController
       flash[:success] = 'Group successfully updated!'
       redirect_to action: 'index', controller: 'welcome'
     else
+      @user_ids = Membership.where(group_id: @group.id).pluck(:user_id)
       flash[:error] = 'Invalid input provided - group edition failed!'
       render 'edit'
     end

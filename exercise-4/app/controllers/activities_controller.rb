@@ -8,8 +8,8 @@ class ActivitiesController < ApplicationController
   before_action :activity_user, only: [:vote, :unvote]
 
   def new
-    @current_group = Group.find(params[:group])
-    session[:current_group] = @current_group.id
+    @activity = Activity.new
+    init_activity(params[:group])
   end
 
   def create
@@ -17,26 +17,26 @@ class ActivitiesController < ApplicationController
 
     if @activity.save
       flash[:success] = 'Activity: ' + @activity.name + ' successfully created.'
+      redirect_to action: 'index', controller: 'welcome'
     else
-      flash[:success] = 'Activity: ' + @activity.name + ' cannot be created.'
+      init_activity(session[:current_group])
+      flash[:error] = 'Activity: ' + @activity.name + ' cannot be created.'
+      render 'new'
     end
-
-    redirect_to action: 'index', controller: 'welcome'
   end
 
   def edit
     @activity = Activity.find(params[:id])
-    @current_group = Group.find(@activity.group_id)
-    session[:current_group] = @current_group.id
+    init_activity(@activity.group_id)
   end
 
   def update
-    @activity = Activity.update(params[:id], activity_params)
-
-    if @activity
+    @activity = Activity.find(params[:id])
+    if @activity.update_attributes(activity_params)
       flash[:success] = 'Activity successfully updated!'
       redirect_to action: 'index', controller: 'welcome'
     else
+      init_activity(@activity.group_id)
       flash[:error] = 'Invalid input provided - group edition failed!'
       render 'edit'
     end
@@ -103,6 +103,11 @@ class ActivitiesController < ApplicationController
     params.require(:activity).permit(:name, :description, :location, :duration,
                                      :start_date, :image_url, :definitive, :votes, :group_id)
 
+  end
+
+  def init_activity(group)
+    @current_group = Group.find(group)
+    session[:current_group] = @current_group.id
   end
 
   def activity_user

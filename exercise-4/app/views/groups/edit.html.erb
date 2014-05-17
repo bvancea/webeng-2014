@@ -3,27 +3,24 @@
   <h1>Update your group</h1>
 </div>
 
-<div>
+<div class="row">
   <div class="span6 offset3">
     <%= form_for(@group) do |f| %>
-        <!--%= render 'shared/error_messages' %-->
+        <%= render 'shared/error_messages', object: f.object %>
 
         <div class="form-group">
-          <%= f.label :name %>
-          <br>
-          <%= f.text_field :name %>
+          <%= f.label :name, class: 'control-label' %>
+          <%= f.text_field :name, class: 'form-control' %>
         </div>
 
         <div class="form-group">
-          <%= f.label :description %>
-          <br>
-          <%= f.text_field :description %>
+          <%= f.label :description, class: 'control-label' %>
+          <%= f.text_field :description, class: 'form-control' %>
         </div>
 
         <div class="form-group">
-          <%= f.label :city %>
-          <br>
-          <%= f.text_field :city %>
+          <%= f.label :city, class: 'control-label' %>
+          <%= f.text_field :city, class: 'form-control' %>
         </div>
 
         <div class="form-group">
