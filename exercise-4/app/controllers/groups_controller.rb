@@ -20,8 +20,10 @@ class GroupsController < ApplicationController
     @user_ids = params[:user_ids]
     @group.owner_id = session[:logged_user_id]
     if @group.save
-      @user_ids.each do |user_id|
-        Membership.create(user_id: user_id, group_id: @group.id)
+      if @user_ids
+        @user_ids.each do |user_id|
+          Membership.create(user_id: user_id, group_id: @group.id)
+        end
       end
       flash[:success] = 'Group successfully created!'
       redirect_to action: 'index', controller: 'welcome'

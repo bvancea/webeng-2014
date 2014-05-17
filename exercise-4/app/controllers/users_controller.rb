@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
 
-  before_action :logged_user, only: [:index]
+  #before_action :logged_user, only: [:index]
 
   def new
+    @user = User.new
   end
 
   def index
@@ -11,15 +12,20 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.password = BCrypt::Password.create(@user.password)
 
-    if @user.save
-      flash[:success] = 'User: ' + @user.username + ' successfully saved.'
-    else
+    if !@user.valid?
       flash[:error] = 'User: ' + @user.username + ' cannot be saved.'
+      render 'new'
+    else
+      @user.password = BCrypt::Password.create(@user.password)
+      if @user.save
+        flash[:success] = 'User: ' + @user.username + ' successfully saved.'
+        redirect_to @user
+      else
+        flash[:error] = 'User: ' + @user.username + ' cannot be saved.'
+        render 'new'
+      end
     end
-
-    redirect_to @user
   end
 
   def show

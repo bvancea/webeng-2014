@@ -1,7 +1,7 @@
 class Group < ActiveRecord::Base
   belongs_to :user
   validates :owner_id, presence: true
-  validates :name, presence: true
+  validates :name, presence: true,  uniqueness: true
 
   has_many :memberships, dependent: :destroy
   has_many :users, through: :memberships
