@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true, length: { maximum: 20 }
   validates :name, presence: true, length: {maximum: 50}
   validates :password, presence: true, length: { minimum: 6 }
-  validates :password, format: { with: VALID_PASSWORD, message: '%{value} is not a valid format: [A-Za-z0-9_] and at least one capital letter and at least one number'}
+  validates :password, format: { with: VALID_PASSWORD, message: '%{value} is not a valid format: [A-Za-z0-9][A-Za-z0-9_]*'}
 
   has_many :groups, foreign_key: 'owner_id'
 
