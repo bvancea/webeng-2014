@@ -42,3 +42,5 @@ gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 gem 'oauth'
+
+gem 'certified'
