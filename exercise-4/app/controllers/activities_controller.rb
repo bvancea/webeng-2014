@@ -47,6 +47,10 @@ class ActivitiesController < ApplicationController
     session[:current_group] = @current_group.id
   end
 
+  def show
+    @activity = Activity.find(params[:activity])
+  end
+
   def vote
     @current_user = User.find(session[:logged_user_id])
     @activity = Activity.find(params[:activity])

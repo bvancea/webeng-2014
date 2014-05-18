@@ -24,6 +24,14 @@ module ActivitiesHelper
     }
   end
 
+  def show_activity_path(activity)
+    {
+        controller: 'activities',
+        action: 'show',
+        :activity => activity.id
+    }
+  end
+
   def unvote_activity_path(activity)
     {
         controller: 'activities',

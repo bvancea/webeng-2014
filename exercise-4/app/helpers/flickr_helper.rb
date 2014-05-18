@@ -24,7 +24,8 @@ module FlickrHelper
                  format: 'json',
                  nojsoncallback: 1,
                  per_page: 12,
-                 tags: text }
+                 tags: text,
+                 tag_mode: 'all'}
       request_url = FLICKR_API_URL + params.to_query
       images = open(request_url)
       response = images.read

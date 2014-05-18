@@ -59,6 +59,18 @@ html {
     overflow-y: scroll;
 }
 
+.card {
+    background-color: #f4f4f4;
+    margin: 1.5em;
+    padding: 0.5em;
+    text-align: center;
+}
+
+.card a:hover {
+    text-decoration: none;
+}
+
+
 
 
 

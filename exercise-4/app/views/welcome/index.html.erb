@@ -6,7 +6,7 @@
 
   <%
      if @user
-       if @user.groups.any?
+
   %>
           <div class="panel-heading">
             Your groups <span class="badge"><%= @user.groups.count %></span>
@@ -17,17 +17,12 @@
           </ol>
           <%= will_paginate @groups, :param_name => 'group_page' %>
       <%
-         else %>
-          <%= link_to 'Create group', new_group_path %>
-       <%
-         end
-         end
+     end
       %>
 </div>
 <div class="panel panel-info">
   <%
      if @user
-       if @user.memberships.any?
   %>
           <div class="panel-heading">
             Your memberships <span class="badge"><%= @user.memberships.count %></span>
@@ -52,7 +47,6 @@
           </ol>
           <%= will_paginate @memberships, :param_name => 'membership_page' %>
       <%
-         end
          end
       %>
 </div>

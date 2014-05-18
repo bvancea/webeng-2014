@@ -1,0 +1,19 @@
+<div class="page-header">
+  <h1>Activity <%= @activity.name %></h1>
+</div>
+
+<%= image_tag @activity.image_url, :size => "150x150" %>
+
+<p>Location: <%= @activity.location %></p>
+<p>Start date: <%= @activity.start_date %></p>
+<p>Duration: <%= @activity.duration %></p>
+<p>Description: <%= @activity.description %></p>
+
+<% if @activity.group.owner_id.equal?(session[:logged_user_id]) %>
+      <% if !@activity.definitive %>
+          <%= button_to 'Make definitive', activity_make_definitive_path(@activity),
+                        {:class => 'btn btn-primary'} %>
+      <% end %>
+      <%= button_to 'Edit', edit_activity_path(@activity), {:class => 'btn btn-primary'} %>
+<% end %>
+

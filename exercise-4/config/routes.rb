@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   #   get 'products/:id' => 'catalog#view'
   post 'login/login' => 'login#authenticate'
   get 'activities/show_all' => 'activities#show_all'
+  get 'activities/show' => 'activities#show'
   post 'activities/vote' => 'activities#vote'
   post 'activities/unvote' => 'activities#unvote'
   post 'activities/make_definitive' => 'activities#make_definitive'
