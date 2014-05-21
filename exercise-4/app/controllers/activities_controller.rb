@@ -35,7 +35,7 @@ class ActivitiesController < ApplicationController
     @activity = Activity.find(params[:id])
     if @activity.update_attributes(activity_params)
       flash[:success] = 'Activity successfully updated!'
-      redirect_to action: 'show_all', controller: 'activities', :group => @activity.group_id
+      redirect_to action: 'show', controller: 'activities', :activity => @activity.id
     else
       init_activity(@activity.group_id)
       flash[:error] = 'Invalid input provided - group edition failed!'
