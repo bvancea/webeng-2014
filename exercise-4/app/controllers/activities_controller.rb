@@ -17,7 +17,8 @@ class ActivitiesController < ApplicationController
 
     if @activity.save
       flash[:success] = 'Activity: ' + @activity.name + ' successfully created.'
-      redirect_to action: 'index', controller: 'welcome'
+      params[:group] = @activity.group_id
+      redirect_to action: 'show_all', controller: 'activities', :group => @activity.group_id
     else
       init_activity(session[:current_group])
       flash[:error] = 'Activity: ' + @activity.name + ' cannot be created.'
@@ -26,7 +27,7 @@ class ActivitiesController < ApplicationController
   end
 
   def edit
-    @activity = Activity.find(params[:id])
+    @activity = Activity.find(params[:format])
     init_activity(@activity.group_id)
   end
 
@@ -34,7 +35,7 @@ class ActivitiesController < ApplicationController
     @activity = Activity.find(params[:id])
     if @activity.update_attributes(activity_params)
       flash[:success] = 'Activity successfully updated!'
-      redirect_to action: 'index', controller: 'welcome'
+      redirect_to action: 'show_all', controller: 'activities', :group => @activity.group_id
     else
       init_activity(@activity.group_id)
       flash[:error] = 'Invalid input provided - group edition failed!'
@@ -49,6 +50,12 @@ class ActivitiesController < ApplicationController
 
   def show
     @activity = Activity.find(params[:activity])
+  end
+
+  def delete
+    Activity.find(params[:format]).destroy
+    flash[:success] = 'Activity successfully deleted!'
+    redirect_to action: 'show_all', controller: 'activities', :group => session[:current_group]
   end
 
   def vote

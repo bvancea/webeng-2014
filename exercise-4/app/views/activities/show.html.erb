@@ -2,18 +2,40 @@
   <h1>Activity <%= @activity.name %></h1>
 </div>
 
-<%= image_tag @activity.image_url, :size => "150x150" %>
+<div id="activity_wrapper">
+  <div id="activity_image">
+    <%= image_tag @activity.image_url, :size => "150x150" %>
+  </div>
 
-<p>Location: <%= @activity.location %></p>
-<p>Start date: <%= @activity.start_date %></p>
-<p>Duration: <%= @activity.duration %></p>
-<p>Description: <%= @activity.description %></p>
+  <div id="activity_content">
+    <dl class="dl-horizontal">
+      <dt>Location:</dt>
+      <dd><%= @activity.location %></dd>
 
-<% if @activity.group.owner_id.equal?(session[:logged_user_id]) %>
-      <% if !@activity.definitive %>
-          <%= button_to 'Make definitive', activity_make_definitive_path(@activity),
-                        {:class => 'btn btn-primary'} %>
-      <% end %>
-      <%= button_to 'Edit', edit_activity_path(@activity), {:class => 'btn btn-primary'} %>
-<% end %>
+      <dt>Start date:</dt>
+      <dd><%= @activity.start_date.to_formatted_s(:long) %></dd>
+
+      <dt>Duration:</dt>
+      <dd><%= @activity.duration %> hours</dd>
+
+      <dt>Description:</dt>
+      <dd><%= @activity.description %></dd>
+    </dl>
+
+    <% if @activity.group.owner_id.equal?(session[:logged_user_id]) %>
+        <ul class="nav nav-pills">
+          <li>
+            <% if !@activity.definitive %>
+                <%= button_to 'Make definitive', activity_make_definitive_path(@activity),
+                              {:class => 'btn btn-success'} %>
+            <% end %>
+          </li>
+          <li><%= button_to 'Edit', activities_edit_path(@activity), {:class => 'btn btn-primary'} %></li>
+          <li><%= button_to 'Delete', activities_delete_path(@activity), {:class => 'btn btn-danger'} %></li>
+        </ul>
+    <% end %>
+  </div>
+</div>
+
+
 

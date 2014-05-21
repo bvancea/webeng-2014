@@ -19,7 +19,7 @@
 
 body {
     background-color: #70B2FF;
-    padding-top: 60px;
+    padding-top: 50px;
 }
 
 .container {
@@ -27,7 +27,7 @@ body {
     height: auto;
     margin: auto;
     background-color: white;
-    margin-top: 2em;
+    margin-top: 0;
 }
 
 .content {
@@ -68,6 +68,15 @@ html {
 
 .card a:hover {
     text-decoration: none;
+}
+
+#activity_image {
+}
+
+#activity_content {
+}
+
+#activity_wrapper {
 }
 
 

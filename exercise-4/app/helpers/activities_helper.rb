@@ -32,6 +32,14 @@ module ActivitiesHelper
     }
   end
 
+  def edit_activity_path(activity)
+    {
+      controller: 'activities',
+      action: 'edit',
+      :id => activity.id
+    }
+  end
+
   def unvote_activity_path(activity)
     {
         controller: 'activities',

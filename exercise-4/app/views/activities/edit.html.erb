@@ -2,7 +2,7 @@
   <h1>Edit activity to <%= @current_group.name %> </h1>
 </div>
 
-<%= form_for @activity, url: activity_path, html: {method: 'patch'} do |f| %>
+<%= form_for @activity do |f| %>
 
     <%= render 'shared/error_messages', object: f.object %>
 
@@ -34,12 +34,12 @@
 
     <div class="form-group">
       <%= f.label :image_url %>
+      <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+        Pick image
+      </button>
       <br>
       <img id="activity-image"/>
       <br>
-      <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-        Pick image
-      </button>
     </div>
 
     <%= f.hidden_field :image_url %>

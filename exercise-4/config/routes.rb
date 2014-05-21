@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   post 'login/login' => 'login#authenticate'
   get 'activities/show_all' => 'activities#show_all'
   get 'activities/show' => 'activities#show'
+  post 'activities/delete' => 'activities#delete'
+  post 'activities/edit' => 'activities#edit'
   post 'activities/vote' => 'activities#vote'
   post 'activities/unvote' => 'activities#unvote'
   post 'activities/make_definitive' => 'activities#make_definitive'
