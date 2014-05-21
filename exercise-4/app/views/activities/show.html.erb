@@ -2,13 +2,12 @@
   <h1>Activity <%= @activity.name %></h1>
 </div>
 
-<div id="activity_wrapper">
-  <div id="activity_image">
+<div class="row">
+  <div class="col-md-2">
     <%= image_tag @activity.image_url, :size => "150x150" %>
   </div>
 
-  <div id="activity_content">
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal col-md-10">
       <dt>Location:</dt>
       <dd><%= @activity.location %></dd>
 
@@ -17,10 +16,14 @@
 
       <dt>Duration:</dt>
       <dd><%= @activity.duration %> hours</dd>
+    </dl>
+</div>
 
+  <dl class="dl-horizontal col-md-12">
       <dt>Description:</dt>
       <dd><%= @activity.description %></dd>
-    </dl>
+  </dl>
+
 
     <% if @activity.group.owner_id.equal?(session[:logged_user_id]) %>
         <ul class="nav nav-pills">
@@ -34,8 +37,6 @@
           <li><%= button_to 'Delete', activities_delete_path(@activity), {:class => 'btn btn-danger'} %></li>
         </ul>
     <% end %>
-  </div>
-</div>
 
 
 
