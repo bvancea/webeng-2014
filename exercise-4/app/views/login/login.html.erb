@@ -1,6 +1,7 @@
-<div class="page-header">
-  <h1>Login</h1>
-</div>
+<div class="login">
+    <div class="page-header login-centered">
+      <h1>Login</h1>
+    </div>
 
 
 <%= form_for :login, url: login_login_path do |f| %>
@@ -21,10 +22,9 @@
       <%= f.password_field :password, class: 'form-control' %>
     </div>
 
-    <div class="form-group">
+    <div class="form-group login-centered">
       <%= f.submit 'Login', :class => 'btn btn-primary' %>
       or <%= link_to 'Register', controller: 'users', action: 'new' %>
     </div>
-
-
 <% end %>
+</div>
